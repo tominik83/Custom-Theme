@@ -12,7 +12,7 @@
 <?php
 
 $github_username = 'tominik83';
-$github_repo = 'Custom Theme';
+$github_repo = 'Custom-Theme';
 
 $url = "https://api.github.com/repos/$github_username/$github_repo/releases/latest";
 
