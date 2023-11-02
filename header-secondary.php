@@ -12,6 +12,16 @@
 
 	<header id="header" class="header">
 
+		<div class="version-info flex">
+			<?php
+			$github_shortcode = get_option('github_version_shortcode', '');
+			echo do_shortcode($github_shortcode);
+			?>
+
+
+		</div>
+
+
 		<nav id="site-navigacija" class="site-navigacija flex">
 
 			<div class="site-branding">

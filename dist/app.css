@@ -14101,6 +14101,14 @@ body {
   overflow: hidden;
 }
 
+.version_element {
+  color: #fff;
+}
+
+.version-info {
+  color: #fff;
+}
+
 .mob-menu {
   display: none;
 }

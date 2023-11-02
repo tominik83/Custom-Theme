@@ -7,36 +7,15 @@
     <h1>Zanimljivo</h1>
 </div>
 
+<div>
+    <?php
+$shortcode_location = get_option('shortcode_location');
 
-
-<?php
-
-$github_username = 'tominik83';
-$github_repo = 'Custom-Theme';
-
-$url = "https://api.github.com/repos/$github_username/$github_repo/releases/latest";
-
-$headers = array(
-    'User-Agent: Custom Theme', // Možete promeniti 'My-App' u naziv vaše aplikacije
-);
-
-$response = wp_safe_remote_request($url, array('headers' => $headers));
-
-if (is_wp_error($response)) {
-    // Greška u dohvatanju podataka
-} else {
-    $body = wp_remote_retrieve_body($response);
-    $data = json_decode($body, true);
-
-    if ($data && isset($data['tag_name'])) {
-        // Ispisivanje informacija o najnovijem release-u
-        echo 'Najnovija verzija: ' . esc_html($data['tag_name']);
-        echo 'Opis: ' . esc_html($data['body']);
-    } else {
-        echo 'Nema dostupnih informacija o verziji.';
-    }
+if ($shortcode_location === 'header') {
+    // Prikaz shortcode-a u headeru
+} elseif ($shortcode_location === 'footer') {
+    // Prikaz shortcode-a u footeru
 }
-
 ?>
-
+</div>
 
