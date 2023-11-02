@@ -7,15 +7,5 @@
     <h1>Zanimljivo</h1>
 </div>
 
-<div>
-    <?php
-$shortcode_location = get_option('shortcode_location');
 
-if ($shortcode_location === 'header') {
-    // Prikaz shortcode-a u headeru
-} elseif ($shortcode_location === 'footer') {
-    // Prikaz shortcode-a u footeru
-}
-?>
-</div>
 

@@ -13,6 +13,7 @@
 	<header id="header" class="header">
 
 		<div class="version-info flex">
+
 			<?php
 			$github_shortcode = get_option('github_version_shortcode', '');
 			echo do_shortcode($github_shortcode);

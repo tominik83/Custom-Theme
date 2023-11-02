@@ -13,7 +13,12 @@
 	<header id="header" class="header">
 
 		<div class="version-info flex">
-[custom_theme_version]
+
+			<?php
+			$theme_version_shortcode = '[theme_version]';
+			echo do_shortcode($theme_version_shortcode);
+			?>
+
 		</div>
 
 
