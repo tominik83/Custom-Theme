@@ -10,6 +10,24 @@ Template Name: About Us
 
 <div class="about-container flex">
 
+    <?php
+    $plugin_path = 'log-reg/log-reg.php';
+    include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+    if (function_exists('is_plugin_active') && is_plugin_active($plugin_path)) {
+        // Plugin je instaliran i aktivan
+        echo "Plugin je instaliran i aktivan.";
+    } elseif (file_exists(WP_PLUGIN_DIR . '/' . $plugin_path)) {
+        // Plugin je instaliran ali nije aktivan
+        echo "Plugin je instaliran, ali nije aktivan.";
+    } else {
+        // Plugin nije instaliran
+        echo "Plugin nije instaliran.";
+    }
+    ?>
+
+
+
+
     <div class="version-info flex">
         <?php
         $theme_version_shortcode = '[theme_version]';
