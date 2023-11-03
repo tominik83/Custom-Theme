@@ -25,6 +25,22 @@ Template Name: About Us
     }
     ?>
 
+    <?php
+    $plugin_path = 'log-reg/log-reg.php';
+    include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+
+    if (file_exists($plugin_path)) {
+        $plugin_data = get_file_data($plugin_path, array('Version' => 'Version'));
+        if (isset($plugin_data['Version'])) {
+            $plugin_version = $plugin_data['Version'];
+            echo "Verzija plugin-a: " . $plugin_version;
+        } else {
+            echo "Nije moguće dobiti verziju plugin-a.";
+        }
+    } else {
+        echo "Plugin fajl nije pronađen.";
+    }
+    ?>
 
 
 

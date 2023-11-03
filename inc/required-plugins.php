@@ -1,30 +1,9 @@
 <?php
 
 /**
- * Plugin Name: Custom Theme - Log-Reg
+ * Plugin Name: Log-Reg
  * Description: Ovaj plugin je obavezan za pravilno funkcionisanje Vaše teme.
  */
-
-// function activate_required_plugin() {
-//     $plugin_path = 'https://github.com/tominik83/WordPress-Plugins/blob/main/archive/log-reg.zip';
-//     $plugin_name = 'log-reg/log-reg.php';
-
-//     // Proverite da li je plugin instaliran i aktiviran
-//     if (!is_plugin_active($plugin_name)) {
-//         // Ako nije, pokušajte ga instalirati i aktivirati
-//         $plugin = get_plugins();
-//         if (empty($plugin[$plugin_name])) {
-//             require_once ABSPATH . 'wp-admin/includes/file.php';
-//             WP_Filesystem();
-//             $result = unzip_file($plugin_path, WP_PLUGIN_DIR);
-//             if (!is_wp_error($result)) {
-//                 activate_plugin($plugin_name);
-//             }
-//         }
-//     }
-// }
-// add_action('after_switch_theme', 'admin_init', 'activate_required_plugin');
-
 
 function activate_required_plugin_on_theme_activation()
 {

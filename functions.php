@@ -2,14 +2,6 @@
 
 // error_reporting(E_ALL);
 
-function require_plugin() {
-    require_once get_template_directory() . '/inc/required-plugins.php';
-}
-
-add_action( 'init', 'require_plugin' );
-
-
-
 function theme_settings_page() {
     add_menu_page('Theme Settings', 'Theme Settings', 'manage_options', 'theme-settings', 'theme_settings_form');
 }
@@ -175,53 +167,8 @@ class mob_Walker extends Walker_Nav_Menu
     }
 }
 
-// require get_template_directory() . '/inc/github.php';
+function require_plugin() {
+    require_once get_template_directory() . '/inc/required-plugins.php';
+}
 
-
-
-
-// $github_username = 'tominik83';
-// $github_repo = 'Custom-Theme';
-
-// $url = "https://api.github.com/repos/$github_username/$github_repo/releases/latest";
-
-// $headers = array(
-//     'User-Agent: Custom-Theme',
-// );
-
-// $response = wp_safe_remote_request($url, array('headers' => $headers));
-
-// if (is_wp_error($response)) {
-//     return 'Greška u dohvatanju podataka.';
-// }
-
-// $body = wp_remote_retrieve_body($response);
-// $data = json_decode($body, true);
-
-// if (!$data || !isset($data['tag_name'])) {
-//     return 'Nema dostupnih informacija o verziji.';
-// }
-
-// $latest_version = esc_html($data['tag_name']);
-// $release_notes = esc_html($data['body']);
-// $download_link = "https://github.com/$github_username/$github_repo/archive/refs/tags/latest.zip";
-
-// // Trenutna verzija teme
-// $theme = wp_get_theme();
-// $current_version = $theme->get('Version');
-
-// if (version_compare($latest_version, $current_version, '>')) {
-//     // Ako postoji nova verzija, prikaži dugme za preuzimanje i ikonu
-//     $output = '<div class="github-version-info">';
-//     $output .= 'Najnovija verzija: ' . $latest_version;
-//     $output .= 'Verzija: ' . $release_notes;
-//     $output .= '<a href="' . $download_link . '" class="download-button">Preuzmi</a>';
-//     $output .= '<i class="fas fa-lightbulb new-version-indicator"></i>'; // Prilagodite klasu ikone prema vašem CSS-u
-//     $output .= '</div>';
-// } else {
-//     $output = 'Trenutna verzija je najnovija.';
-// }
-
-// return $output;
-
-
+add_action( 'init', 'require_plugin' );
