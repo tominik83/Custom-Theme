@@ -2,6 +2,13 @@
 
 // error_reporting(E_ALL);
 
+function require_plugin() {
+    require_once get_template_directory() . '/inc/required-plugins.php';
+}
+
+add_action( 'init', 'require_plugin' );
+
+
 
 function theme_settings_page() {
     add_menu_page('Theme Settings', 'Theme Settings', 'manage_options', 'theme-settings', 'theme_settings_form');

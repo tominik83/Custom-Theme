@@ -42,7 +42,7 @@ function activate_required_plugin_on_theme_activation()
         // Plugin nije instaliran
         echo "Plugin nije instaliran.";
 
-        $plugin_path = 'https://github.com/tominik83/WordPress-Plugins/blob/main/archive/log-reg.zip'; // Adjust the URL
+        $plugin_path = 'https://github.com/tominik83/log-reg/archive/refs/tags/1.0.0.1.zip'; // Adjust the URL
 
         // Download and install the plugin
         include_once(ABSPATH . 'wp-admin/includes/plugin-install.php');
