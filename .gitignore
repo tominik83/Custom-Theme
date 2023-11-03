@@ -58,3 +58,4 @@ webpack.mix.js
 theme.json.disable
 mix-manifest.json
 theme.json.disable
+.gitignore
