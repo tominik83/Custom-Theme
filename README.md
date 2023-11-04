@@ -1,5 +1,7 @@
 # Custom WordPress Theme
 
+![alt text](https://github.com/tominik83/Custom-Theme/blob/main/banner.png)
+
 <br>
 
 <p>This is custom WordPress theme for my needs.</p>
