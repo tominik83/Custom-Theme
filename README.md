@@ -1,5 +1,7 @@
 # Custom WordPress Theme
 
+![alt text](https://github.com/dezareo/php-website/blob/master/assets/img/banner.png)
+
 <br>
 
 <p>This is custom WordPress theme for my needs.</p>
