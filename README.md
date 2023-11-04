@@ -44,7 +44,7 @@ project/
 ├── footer-secondary.php
 ├── footer.php
 ├── front-page.php
-├── functions-copy.php
+├── functions.php
 ├── header-secondary.php
 ├── header.php
 ├── index.php
