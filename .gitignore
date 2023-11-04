@@ -61,3 +61,4 @@ mix-manifest.json
 theme.json.disable
 .gitignore
 .vscode
+functions copy.php
