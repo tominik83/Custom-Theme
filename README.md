@@ -1,6 +1,6 @@
 # Custom WordPress Theme
 
-![alt text](https://github.com/dezareo/php-website/blob/master/assets/img/banner.png)
+![alt text](https://github.com/tominik83/Custom-Theme/blob/main/banner.png)
 
 <br>
 
