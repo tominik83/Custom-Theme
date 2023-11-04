@@ -1,4 +1,16 @@
-# custom-theme
+# Custom WordPress Theme
+
+<br>
+
+<p>This is custom WordPress theme for my needs.</p>
+
+## Pages
+
+## Styles
+
+## Modules
+
+## Project structure
 
 /*
 Theme Name: SAS Theme
