@@ -1762,7 +1762,7 @@ header .site-navigacija ul {
   justify-content: space-between;
   list-style: none;
   align-items: center;
-  gap: 40px;
+  gap: 20px;
 }
 
 header .nav-menu ul a {
@@ -2146,16 +2146,4 @@ body {
 
 .hamburger {
   display: none;
-}
-
-.notification {
-  display: none;
-  background-color: #f2f2f2;
-  color: #333;
-  padding: 10px;
-  text-align: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
 }

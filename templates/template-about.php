@@ -11,41 +11,13 @@ Template Name: About Us
 <div class="about-container flex">
 
 
-<div style="height:100px" aria-hidden="true" class="div-spacer"></div>
-
-<button id="show-notification">Prikaži notifikaciju</button>
+    <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
 
 
-<!-- <button id="update-button">Check for Updates</button> -->
 
-<form method="post" action="">
-    <input type="submit" name="update_theme_button" value="Check for Updates">
-</form>
-<?php
-
-if (isset($_POST['my_theme_update_available'])) {
-    my_theme_update_available(); // Poziva funkciju za ažuriranje i prikazuje rezultat
-}
-?>
+      <p id="client-ip">IP adress</p>
 
 
-<!-- <div class="notification" id="update-notification">
-        Novo ažuriranje je dostupno! <a href="#" id="update-link">Kliknite ovdje</a> za više detalja.
-    </div> -->
-
-<!-- <?php
-
-function druga_funkcija() {
-    global $latest_version; // Koristimo globalnu promenljivu
-
-    // Sada možemo koristiti $latest_version u ovoj funkciji
-    echo 'Trenutna verzija: ' . $latest_version;
-    // Možete dodati više koda koji koristi $latest_version prema vašim potrebama
-}
-
-// Poziv druge funkcije
-druga_funkcija();
-?> -->
 
 
 
@@ -62,9 +34,9 @@ druga_funkcija();
         // Plugin nije instaliran
         echo "Plugin nije instaliran.";
     }
-    ?>
+    ?> -->
 
-    <?php
+    <!-- <?php
     $plugin_path = 'log-reg/log-reg.php';
     include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
@@ -94,14 +66,17 @@ druga_funkcija();
 
     <h1 class="animate__animated animate__bounce">An animated element</h1>
 
-    <div style="width: 400px; height:100px; background-color: #fff" aria-hidden="true" class="div-spacer"></div>
+    <!-- <div style="width: 400px; height:100px; background-color: #fff" aria-hidden="true" class="div-spacer"></div> -->
 
-    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+    <?php if (have_posts()):
+        while (have_posts()):
+            the_post(); ?>
 
             <?php the_content(); ?>
 
-    <?php endwhile;
-    else : endif; ?>
+        <?php endwhile;
+    else:
+    endif; ?>
 
     <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
 </div>

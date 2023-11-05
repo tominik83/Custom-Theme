@@ -2,19 +2,37 @@
 
 // error_reporting(E_ALL);
 
+// function theme_get_user_ip()
+// {
+    
+//     if ( !empty($_SERVER['HTTP_CLIENT_IP']) ) {
+//         //ip from share internet
+//         $ip = $_SERVER['HTTP_CLIENT_IP'];
+//     } elseif ( !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ) {
+//         //ip pass from proxy
+//         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+//     } else {
+//         $ip = $_SERVER['REMOTE_ADDR'];
+//     }
+    
+//     return $ip;
+// }
+
+// add_action('init', 'theme_get_user_ip');
+
 function theme_settings_page()
 {
-    add_menu_page('Theme Settings', 'Theme Settings', 'manage_options', 'theme-settings', 'theme_settings_form');
-    add_submenu_page('theme-settings', 'Submenu Page 1', 'Submenu Page 1', 'manage_options', 'theme-settings-submenu-1', 'theme_submenu_page_1');
-    add_submenu_page('theme-settings', 'Settings', 'Settings', 'manage_options', 'theme-settings-settings', 'theme_submenu_page_2');
+    add_menu_page('Theme Options', 'Theme Options', 'manage_options', 'theme-settings', 'theme_option_form');
+    add_submenu_page('theme-settings', 'Style', 'Style', 'manage_options', 'theme-settings-submenu-1', 'theme_submenu_page_1');
+    add_submenu_page('theme-settings', 'Settings', 'Settings', 'manage_options', 'theme-settings-settings', 'admin_submenu_settings');
 }
 add_action('admin_menu', 'theme_settings_page');
 
-function theme_settings_form()
+function theme_option_form()
 {
 ?>
     <div class="wrap">
-        <h2>Theme Settings</h2>
+        <h2>Wolcome to Custom Theme</h2>
         <form method="post" action="options.php">
             <?php settings_fields('theme-settings-group'); ?>
             <?php do_settings_sections('theme-settings-group'); ?>
@@ -45,7 +63,7 @@ function theme_submenu_page_1() {
     <h2>Submenu Page 1</h2><p>Sadržaj prve podstranice ovde.</p></div>';
 }
 
-function theme_submenu_page_2()
+function admin_submenu_settings()
 {
 admin_panel();
 }
@@ -66,7 +84,7 @@ function add_theme_settings_link($links)
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'add_theme_settings_link');
 
 
-//Funkcija za Plugin Version check
+// Funkcija za Plugin Version check
 function plugin_update_version()
 {
 
@@ -90,8 +108,9 @@ function plugin_update_version()
     } else {
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
-
+        
         if (is_array($data)) {
+            $latest_download_link = null;
             foreach ($data as $release) {
                 if (isset($release['tag_name'])) {
                     $tag_name = esc_html($release['tag_name']);
@@ -105,12 +124,12 @@ function plugin_update_version()
                         if (isset($plugin_data['Version'])) {   // PROVERA VERZIJE PLUGIN-a
                             $plugin_version = $plugin_data['Version'];
                             // echo '<p class="update-available"> Plugin Ver: ' . esc_html($plugin_version) . '</p>';
-                            $download_link = "https://github.com/$github_username/$github_repo/archive/refs/tags/$tag_name.zip";
+                            $latest_download_link = "https://github.com/$github_username/$github_repo/archive/refs/tags/$tag_name.zip";
                             if (version_compare($tag_name, $plugin_version, '>')) {
                                 echo '<p class="update-available"> Update Available: ' . esc_html($tag_name) . '</p>';
                                 echo '<p class="update-available"> Name: ' . esc_html($name) . '</p>';
                                 echo '<p class="update-available"> Description: ' . esc_html($release_notes) . '</p>';
-                                echo '<a href="' . $download_link . '" class="download-button">Download</a>';
+                                echo '<a href="' . $latest_download_link . '" class="download-button">Download</a>';
                                 echo '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAW1JREFUSEutlttZwzAMRo82KZuQTcokZZN2E7IJMIn5fEki2VKcB/KStrZ1+S9yhf0RIB1f3U+CkKa7ytEWLr+cR63OcvbRtv1hAh17aEr/4Hx2QDAdHOsDFG4fAnLeoCA+8jpB2ZE2TDvO8sZT6lQH0c6WICbrYLTt6cG7oqOGxIB7KzAurkI0V6gD9X5y6E3HDGRqz0gmwVeIQ7KVoeGgmKiuP4DPE4cMXEN6AR893mcdPBHuvW379ltBK7BswUOItA+a9r5BbpMRUoJHnpxxcAO+gPz2xtYP8GYGTyeHCz4owcckkINnzNc9QTDV4mF3rLwjPEkaLlkgrdXJ8YwaZ1Hsiaysu8AtCQtJ1ogbM9PmRjPVPSD9IrziS8FWWDtoWZQPZjOsHDoun+giCqfpFVqiy087udbeP8lWpzUSkWnGqOXV4fTSJdlDpAgfhLOn15j+1x+AK0arBThy8y0QqigmTavLH/7WyzrFH7dQmx8CV/g9AAAAAElFTkSuQmCC"/>';
                             }
                         }
@@ -125,52 +144,52 @@ function plugin_update_version()
 
 
 
-function theme_update_version()
-{
+// function theme_update_version()
+// {
     
-    $github_username = 'tominik83';
-    $github_repo = 'Custom-Theme';
+//     $github_username = 'tominik83';
+//     $github_repo = 'Custom-Theme';
 
-    $url = "https://api.github.com/repos/$github_username/$github_repo/releases/latest";
+//     $url = "https://api.github.com/repos/$github_username/$github_repo/releases/latest";
 
-    $headers = array(
-        'User-Agent: Custom-Theme', // Name for aplication repository
-    );
+//     $headers = array(
+//         'User-Agent: Custom-Theme', // Name for aplication repository
+//     );
 
-    $response = wp_safe_remote_request($url, array('headers' => $headers));
+//     $response = wp_safe_remote_request($url, array('headers' => $headers));
 
-    if (is_wp_error($response)) {
-        // Error getting data
-        echo '<p class="error-msg">Error</p>';
-    } else {
-        $body = wp_remote_retrieve_body($response);
-        $data = json_decode($body, true);
+//     if (is_wp_error($response)) {
+//         // Error getting data
+//         echo '<p class="error-msg">Error</p>';
+//     } else {
+//         $body = wp_remote_retrieve_body($response);
+//         $data = json_decode($body, true);
 
-        if ($data && isset($data['tag_name'])) {
-            // Information of new release
-            $latest_version = esc_html($data['tag_name']);
-            // $version_with_ver = 'ver=' . $latest_version;
-            $release_notes = esc_html($data['body']);
-            // echo 'Ver: ' . esc_html($data['body']);
+//         if ($data && isset($data['tag_name'])) {
+//             // Information of new release
+//             $latest_version = esc_html($data['tag_name']);
+//             // $version_with_ver = 'ver=' . $latest_version;
+//             $release_notes = esc_html($data['body']);
+//             // echo 'Ver: ' . esc_html($data['body']);
 
-            // Download link for latest
-            $download_link = 'https://github.com/tominik83/Custom-Theme/archive/refs/tags/latest.zip';
+//             // Download link for latest
+//             $download_link = 'https://github.com/tominik83/Custom-Theme/archive/refs/tags/latest.zip';
 
-            // Check if Update
-            $theme = wp_get_theme();
-            $current_version = $theme->get('Version'); // Trenutna verzija teme
-            // echo 'Theme Version: ' . $current_version;
-            if (version_compare($latest_version, $current_version, '>')) {
-                echo '<p class="update-available"> Update Available: ' . esc_html($latest_version) . '</p>';
-                echo '<p class="describe">Description: ' . esc_html($release_notes) . '</p>';
-                echo '<a href="' . $download_link . '" class="download-button">Download</a>';
-                echo '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAW1JREFUSEutlttZwzAMRo82KZuQTcokZZN2E7IJMIn5fEki2VKcB/KStrZ1+S9yhf0RIB1f3U+CkKa7ytEWLr+cR63OcvbRtv1hAh17aEr/4Hx2QDAdHOsDFG4fAnLeoCA+8jpB2ZE2TDvO8sZT6lQH0c6WICbrYLTt6cG7oqOGxIB7KzAurkI0V6gD9X5y6E3HDGRqz0gmwVeIQ7KVoeGgmKiuP4DPE4cMXEN6AR893mcdPBHuvW379ltBK7BswUOItA+a9r5BbpMRUoJHnpxxcAO+gPz2xtYP8GYGTyeHCz4owcckkINnzNc9QTDV4mF3rLwjPEkaLlkgrdXJ8YwaZ1Hsiaysu8AtCQtJ1ogbM9PmRjPVPSD9IrziS8FWWDtoWZQPZjOsHDoun+giCqfpFVqiy087udbeP8lWpzUSkWnGqOXV4fTSJdlDpAgfhLOn15j+1x+AK0arBThy8y0QqigmTavLH/7WyzrFH7dQmx8CV/g9AAAAAElFTkSuQmCC"/>';
-            }
-        } else {
-            echo 'Up to date';
-        }
-    }
-}
+//             // Check if Update
+//             $theme = wp_get_theme();
+//             $current_version = $theme->get('Version'); // Trenutna verzija teme
+//             // echo 'Theme Version: ' . $current_version;
+//             if (version_compare($latest_version, $current_version, '>')) {
+//                 echo '<p class="update-available"> Update Available: ' . esc_html($latest_version) . '</p>';
+//                 echo '<p class="describe">Description: ' . esc_html($release_notes) . '</p>';
+//                 echo '<a href="' . $download_link . '" class="download-button">Download</a>';
+//                 echo '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAW1JREFUSEutlttZwzAMRo82KZuQTcokZZN2E7IJMIn5fEki2VKcB/KStrZ1+S9yhf0RIB1f3U+CkKa7ytEWLr+cR63OcvbRtv1hAh17aEr/4Hx2QDAdHOsDFG4fAnLeoCA+8jpB2ZE2TDvO8sZT6lQH0c6WICbrYLTt6cG7oqOGxIB7KzAurkI0V6gD9X5y6E3HDGRqz0gmwVeIQ7KVoeGgmKiuP4DPE4cMXEN6AR893mcdPBHuvW379ltBK7BswUOItA+a9r5BbpMRUoJHnpxxcAO+gPz2xtYP8GYGTyeHCz4owcckkINnzNc9QTDV4mF3rLwjPEkaLlkgrdXJ8YwaZ1Hsiaysu8AtCQtJ1ogbM9PmRjPVPSD9IrziS8FWWDtoWZQPZjOsHDoun+giCqfpFVqiy087udbeP8lWpzUSkWnGqOXV4fTSJdlDpAgfhLOn15j+1x+AK0arBThy8y0QqigmTavLH/7WyzrFH7dQmx8CV/g9AAAAAElFTkSuQmCC"/>';
+//             }
+//         } else {
+//             echo 'Up to date';
+//         }
+//     }
+// }
 
 // add_shortcode('theme_version', 'theme_update_version');
 // add_action('after_setup_theme', 'update_version');
@@ -201,13 +220,23 @@ function my_theme_update_available() {
             if ($data && isset($data['tag_name'])) {
                 $latest_version = esc_html($data['tag_name']);
                 // Spremi $latest_version u globalnu promenljivu
-                
-                // echo '<p class="update-available"> Update Available: ' . esc_html($latest_version) . '</p>';
             }
         }
     }
     
-
+    // function show_update_notification() {
+    //     ob_start();
+    //     my_theme_update_available();
+    //     $output = ob_get_clean();
+        
+    //     if (strpos($output, 'Update Available:') !== false) {
+    //         // Ako postoji dostupan update, prikaži obaveštenje.
+    //         add_action('admin_notices', function() use ($output) {
+    //             echo '<div class="notice notice-success is-dismissible"><p>' . esc_html($output) . '</p></div>';
+    //         });
+    //     }
+    // }
+    // add_action('admin_init', 'show_update_notification');
 
 
 

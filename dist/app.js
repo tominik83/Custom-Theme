@@ -1,6 +1,16 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/_jquery.js":
+/*!************************!*\
+  !*** ./src/_jquery.js ***!
+  \************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
 /***/ "./src/_mobi-ver.js":
 /*!**************************!*\
   !*** ./src/_mobi-ver.js ***!
@@ -20,48 +30,6 @@
   \*********************/
 /***/ (() => {
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     const mobMenu = document.querySelector(".mob-menu");
-//     const menuToggle = document.querySelector(".hamburger");
-
-//     menuToggle.addEventListener('click', function () {
-//         const visibility = mobMenu.getAttribute('data-visible');
-
-//         if (visibility === "false") {
-//             mobMenu.setAttribute("data-visible", "true");
-//             mobMenu.addClass("open");
-//             menuToggle.classList.add('change');
-//         } else {
-//             mobMenu.setAttribute("data-visible", "false");
-//             mobMenu.removeClass("open");
-//             menuToggle.classList.remove('change');
-//         }
-
-//         console.log(visibility);
-//     });
-// });
-
-// jQuery(document).ready(function($) {
-//     var mobMenu = $(".mob-menu");
-//     var menuToggle = $(".hamburger");
-
-//     menuToggle.on("click", function() {
-//         var visibility = mobMenu.attr("data-visible");
-
-//         if (visibility === "false") {
-//             mobMenu.attr("data-visible", "true");
-//             mobMenu.addClass("open");
-//             menuToggle.addClass("change");
-//         } else {
-//             mobMenu.attr("data-visible", "false");
-//             mobMenu.removeClass("open");
-//             menuToggle.removeClass("change");
-//         }
-
-//         console.log(visibility);
-//     });
-// });
-
 jQuery(document).ready(function ($) {
   var mobMenu = $(".mob-menu");
   var menuToggle = $(".hamburger");
@@ -79,14 +47,14 @@ jQuery(document).ready(function ($) {
         var link = $(this);
         setTimeout(function () {
           link.addClass('active');
-        }, index * 100); // Promenite vreme kašnjenja (u milisekundama) po potrebi
+        }, index * 200); // Change time delay (in milisec)
       });
     } else {
       mobMenu.attr("data-visible", "false");
       mobMenu.removeClass("open");
       menuToggle.removeClass("change");
 
-      // Ukloniti "active" klasu sa linkova kada se meni zatvori
+      // Ukloni "active" klasu sa linkova kada se meni zatvori
       var navLinks = $('.phone-menu li');
       navLinks.removeClass('active');
       // mobMenu.removeClass("active");
@@ -110,63 +78,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nav_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_nav_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _mobi_ver_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_mobi-ver.js */ "./src/_mobi-ver.js");
 /* harmony import */ var _mobi_ver_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_mobi_ver_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _jquery_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_jquery.js */ "./src/_jquery.js");
+/* harmony import */ var _jquery_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_jquery_js__WEBPACK_IMPORTED_MODULE_2__);
 
 
-$(document).ready(function () {
-  $('#update-button').click(function () {
-    // Pozivanje funkcije plug_update_version() kada korisnik klikne na dugme
-    my_theme_update_available();
-  });
-});
-document.addEventListener("DOMContentLoaded", function () {
-  var notification = document.getElementById("update-notification");
-  var updateLink = document.getElementById("update-link");
 
-  // Proveri uslov da bi prikazao Update ili nesto
-  var shouldShowNotification = true;
-  if (shouldShowNotification) {
-    notification.style.display = "block";
 
-    // Rutina za klikom na link
-    updateLink.addEventListener("click", function (event) {
-      event.preventDefault();
-      // Ovdje dodajte kod za prikaz detalja ažuriranja
-    });
-  }
-});
-
+//Ip Check Script
 // document.addEventListener("DOMContentLoaded", function() {
-//     // Proverite da li pregledač podržava notifikacije
-//     if (!("Notification" in window)) {
-//       console.log("Vaš pregledač ne podržava notifikacije.");
-//     } else {
-//       // Proverite da li korisnik već dozvoljava notifikacije
-//       if (Notification.permission === "granted") {
-//         // Ako već ima dozvolu, možemo prikazati notifikaciju
-//         showNotification();
-//       } else if (Notification.permission !== "denied") {
-//         // Ako korisnik nije odabrao još, pitajte za dozvolu
-//         document.querySelector("#show-notification").addEventListener("click", requestNotificationPermission);
-//       }
-//     }
+//     // Koristimo javnu uslugu za dobijanje IP adrese klijenta
+//     fetch("https://ipapi.co/json/")
+//       .then(response => response.json())
+//       .then(data => {
+//         const clientIP = data.ip;
+//         console.log(clientIP);
+//         // Prikazujemo IP adresu na stranici
+//         document.getElementById("client-ip").textContent = "Vaša IP adresa: " + clientIP;
+//       })
+//       .catch(error => {
+//         console.error("Greška prilikom dobijanja IP adrese: " + error);
+//       });
+
 //   });
 
-//   function requestNotificationPermission() {
-//     Notification.requestPermission().then(function(permission) {
-//       if (permission === "granted") {
-//         showNotification();
-//       }
-//     });
-//   }
+//   document.addEventListener("DOMContentLoaded", function () {
+//     const notification = document.getElementById("#show-notification");
+//     const updateLink = document.getElementById("update-link");
 
-//   function showNotification() {
-//     var notificationOptions = {
-//       body: "Ovo je vaša notifikacija.",
-//       icon: "URL-DO-IKONICE" // Dodajte URL do ikonice koju želite koristiti
-//     };
+//     // Proveri uslov da bi prikazao Update ili nesto
+//     const shouldShowNotification = true;
 
-//     var notification = new Notification("Naslov notifikacije", notificationOptions);
-//   }
+//     if (shouldShowNotification) {
+//         notification.style.display = "block";
+
+//         // Rutina za klikom na link
+//         updateLink.addEventListener("click", function (event) {
+//             event.preventDefault();
+//             // Ovdje dodajte kod za prikaz detalja ažuriranja
+//         });
+//     }
+// });
 
 /***/ }),
 

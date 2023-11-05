@@ -7,7 +7,7 @@ Template Name: 404
 
 <?php get_header('secondary'); ?>
 
-<div class="404-container flex">
+
 
     <div id="primary" class="content-area">
         <div id="content" class="site-content" role="main">
@@ -27,10 +27,8 @@ Template Name: 404
                     </h1>
                     
                     <?php get_search_form(); ?>
-                </div><!-- / .page-content -->
-            </div><!-- / .page-wrapper -->
+                </div>
+            </div>
+        </div>
+    </div>
 
-        </div><!-- / #content -->
-    </div><!-- / #primary -->
-
-</div><!-- / .404-container flex -->
