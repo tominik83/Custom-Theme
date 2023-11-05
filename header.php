@@ -78,9 +78,9 @@
 					// 'menu' => 'primay',
 					'theme_location' => 'mobile-menu',
 					'menu_class' => 'phone-menu',
-					'container' => '',
-					'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-					'walker' => new mob_Walker(),
+					// 'container' => '',
+					// 'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+					// 'walker' => new mob_Walker(),
 				)
 			);
 			?>

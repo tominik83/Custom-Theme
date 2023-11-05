@@ -10,7 +10,46 @@ Template Name: About Us
 
 <div class="about-container flex">
 
-    <?php
+
+<div style="height:100px" aria-hidden="true" class="div-spacer"></div>
+
+<button id="show-notification">Prikaži notifikaciju</button>
+
+
+<!-- <button id="update-button">Check for Updates</button> -->
+
+<form method="post" action="">
+    <input type="submit" name="update_theme_button" value="Check for Updates">
+</form>
+<?php
+
+if (isset($_POST['my_theme_update_available'])) {
+    my_theme_update_available(); // Poziva funkciju za ažuriranje i prikazuje rezultat
+}
+?>
+
+
+<!-- <div class="notification" id="update-notification">
+        Novo ažuriranje je dostupno! <a href="#" id="update-link">Kliknite ovdje</a> za više detalja.
+    </div> -->
+
+<!-- <?php
+
+function druga_funkcija() {
+    global $latest_version; // Koristimo globalnu promenljivu
+
+    // Sada možemo koristiti $latest_version u ovoj funkciji
+    echo 'Trenutna verzija: ' . $latest_version;
+    // Možete dodati više koda koji koristi $latest_version prema vašim potrebama
+}
+
+// Poziv druge funkcije
+druga_funkcija();
+?> -->
+
+
+
+    <!-- <?php
     $plugin_path = 'log-reg/log-reg.php';
     include_once(ABSPATH . 'wp-admin/includes/plugin.php');
     if (function_exists('is_plugin_active') && is_plugin_active($plugin_path)) {
@@ -40,16 +79,16 @@ Template Name: About Us
     } else {
         echo "Plugin fajl nije pronađen.";
     }
-    ?>
+    ?> -->
 
 
 
-    <div class="version-info flex">
+    <!-- <div class="version-info flex">
         <?php
         $theme_version_shortcode = '[theme_version]';
         echo do_shortcode($theme_version_shortcode);
         ?>
-    </div>
+    </div> -->
 
     <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
 

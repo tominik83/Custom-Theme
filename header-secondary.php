@@ -15,8 +15,8 @@
 		<div class="version-info flex">
 
 			<?php
-			$github_shortcode = get_option('github_version_shortcode', '');
-			echo do_shortcode($github_shortcode);
+			$notification_shortcode = get_option('notification_shortcode', '');
+			echo do_shortcode($notification_shortcode);
 			?>
 
 
@@ -25,7 +25,7 @@
 
 		<nav id="site-navigacija" class="site-navigacija flex">
 
-			<div class="site-branding">
+			<div class="site-branding flex">
 				<?php
 				the_custom_logo();
 				if (is_front_page() && is_home()) :
@@ -37,6 +37,8 @@
 					<p class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></p>
 				<?php
 				endif;
+				
+
 				$customtheme_description = get_bloginfo('description', 'display');
 				if ($customtheme_description || is_customize_preview()) :
 				?>
@@ -79,9 +81,9 @@
 					// 'menu' => 'primay',
 					'theme_location' => 'mobile-menu',
 					'menu_class' => 'phone-menu',
-					'container' => '',
-					'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-					'walker' => new mob_Walker(),
+					// 'container' => '',
+					// 'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+					// 'walker' => new mob_Walker(),
 				)
 			);
 			?>

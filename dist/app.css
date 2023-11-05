@@ -1,4 +1,9 @@
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap);
+@charset "UTF-8";
+#wpwrap #wpcontent #wpbody #wpbody-content .theme_admin {
+  background-color: #c20000;
+}
+
 :root {
   --animate-duration: 1s;
   --animate-delay: 1s;
@@ -1723,21 +1728,27 @@ header:hover::after {
 }
 
 header .site-navigacija {
+  display: inline-flex;
   width: 80%;
   max-width: 1920px;
   list-style: none;
   text-decoration: none;
-  margin: 0 auto;
   padding: 0 0 0 10px;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
   overflow: hidden;
 }
 
-header .site-branding p {
-  position: relative;
-  bottom: 0;
+.site-branding {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.site-title,
+.site-description {
+  color: #fff;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px; /* Dodajte margine po potrebi između elemenata */
 }
 
 header .nav-menu {
@@ -1751,6 +1762,7 @@ header .site-navigacija ul {
   justify-content: space-between;
   list-style: none;
   align-items: center;
+  gap: 40px;
 }
 
 header .nav-menu ul a {
@@ -1766,12 +1778,9 @@ header .nav-menu ul .current-menu-item a {
   border-bottom: 2px solid rgb(17, 173, 43);
 }
 
-header .nav-menu ul a {
-  border-bottom: 2px solid transparent;
-}
-
 header .nav-menu ul a:hover {
   border-bottom: 2px solid rgb(169, 15, 216);
+  border-bottom-left-radius: 3px;
 }
 
 @media (max-width: 768px) {
@@ -1981,10 +1990,6 @@ footer a {
   padding: 0 0.5rem;
 }
 
-:root {
-  --mobile-width: 768px;
-}
-
 *,
 *::before,
 *::after {
@@ -1995,6 +2000,12 @@ footer a {
 
 .flex {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
   justify-content: center;
   align-items: center;
 }
@@ -2105,13 +2116,6 @@ body {
   font-size: 6rem;
 }
 
-.site-branding {
-  width: 40px;
-  height: 40px;
-  justify-content: center;
-  align-items: center;
-}
-
 .search-container {
   display: flex;
   justify-content: center;
@@ -2132,6 +2136,7 @@ body {
 }
 
 .version-info {
+  padding-right: 10px;
   color: #fff;
 }
 
@@ -2141,4 +2146,16 @@ body {
 
 .hamburger {
   display: none;
+}
+
+.notification {
+  display: none;
+  background-color: #f2f2f2;
+  color: #333;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }

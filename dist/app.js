@@ -112,6 +112,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mobi_ver_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_mobi_ver_js__WEBPACK_IMPORTED_MODULE_1__);
 
 
+$(document).ready(function () {
+  $('#update-button').click(function () {
+    // Pozivanje funkcije plug_update_version() kada korisnik klikne na dugme
+    my_theme_update_available();
+  });
+});
+document.addEventListener("DOMContentLoaded", function () {
+  var notification = document.getElementById("update-notification");
+  var updateLink = document.getElementById("update-link");
+
+  // Proveri uslov da bi prikazao Update ili nesto
+  var shouldShowNotification = true;
+  if (shouldShowNotification) {
+    notification.style.display = "block";
+
+    // Rutina za klikom na link
+    updateLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      // Ovdje dodajte kod za prikaz detalja ažuriranja
+    });
+  }
+});
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     // Proverite da li pregledač podržava notifikacije
+//     if (!("Notification" in window)) {
+//       console.log("Vaš pregledač ne podržava notifikacije.");
+//     } else {
+//       // Proverite da li korisnik već dozvoljava notifikacije
+//       if (Notification.permission === "granted") {
+//         // Ako već ima dozvolu, možemo prikazati notifikaciju
+//         showNotification();
+//       } else if (Notification.permission !== "denied") {
+//         // Ako korisnik nije odabrao još, pitajte za dozvolu
+//         document.querySelector("#show-notification").addEventListener("click", requestNotificationPermission);
+//       }
+//     }
+//   });
+
+//   function requestNotificationPermission() {
+//     Notification.requestPermission().then(function(permission) {
+//       if (permission === "granted") {
+//         showNotification();
+//       }
+//     });
+//   }
+
+//   function showNotification() {
+//     var notificationOptions = {
+//       body: "Ovo je vaša notifikacija.",
+//       icon: "URL-DO-IKONICE" // Dodajte URL do ikonice koju želite koristiti
+//     };
+
+//     var notification = new Notification("Naslov notifikacije", notificationOptions);
+//   }
 
 /***/ }),
 

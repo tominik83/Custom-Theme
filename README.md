@@ -16,15 +16,20 @@
 
 ```
 project/
+
 ├── dist/
     ├── app.css
     └── app.js
+
 ├── inc/
+    ├── admin/admin_panel.php
+    ├── img/
     ├── required-github.php
     ├── required-new-version.php
     ├── required-plugins.php
     ├── section-blog.php
     └── section-contect.php
+    
 ├── templates/
     ├── template-404.php
     ├── template-about.php
@@ -35,6 +40,7 @@ project/
     ├── template-login.php
     ├── template-search.php
     └── template-single.php
+
 ├── .gitignore
 ├── 404.php
 ├── README.md
