@@ -10,7 +10,7 @@ Template Name: Login
 <div class="login-container flex">
 
     <div style="height:100px" aria-hidden="true" class=" div-spacer "></div>
-
+    
     <?php
     // Provera da li je plugin instaliran
     $plugin_path = 'log-reg/log-reg.php';

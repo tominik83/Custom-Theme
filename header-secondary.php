@@ -12,38 +12,58 @@
 
 	<header id="header" class="header">
 
-		<div class="version-info flex">
+		<div class="version-info">
+
+			<!-- <?php
+
+
+			// $notification_shortcode = get_option('my_theme_update_available', '');
+			$notification_shortcode = '[theme_version]';
+			echo do_shortcode($notification_shortcode);
+			?> -->
 
 			<?php
-			$notification_shortcode = get_option('notification_shortcode', '');
-			echo do_shortcode($notification_shortcode);
+			// Otvaranje PHP bloka
+			
+			// Umetanje funkcije theme_update_check_show()
+			theme_update_check_show();
+
+			// Zatvaranje PHP bloka
 			?>
+
+
 
 
 		</div>
 
 
-		<nav id="site-navigacija" class="site-navigacija flex">
+		<nav id="site-navigacija" class="site-navigacija">
 
 			<div class="site-branding flex">
 				<?php
 				the_custom_logo();
-				if (is_front_page() && is_home()) :
-				?>
-					<h1 class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
-				<?php
-				else :
-				?>
-					<p class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></p>
-				<?php
+				if (is_front_page() && is_home()):
+					?>
+					<h1 class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+							<?php bloginfo('name'); ?>
+						</a></h1>
+					<?php
+				else:
+					?>
+					<p class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+							<?php bloginfo('name'); ?>
+						</a></p>
+					<?php
 				endif;
-				
+
 
 				$customtheme_description = get_bloginfo('description', 'display');
-				if ($customtheme_description || is_customize_preview()) :
-				?>
-					<p class="site-description"><?php echo $customtheme_description; ?></p>
-				<?php
+				if ($customtheme_description || is_customize_preview()):
+					?>
+					<p class="site-description">
+						<?php echo $customtheme_description; ?>
+					</p>
+					<?php
 				endif;
 				?>
 			</div>
@@ -68,11 +88,11 @@
 			<div class="bar3"></div>
 		</div>
 
-		<span class="session-state-indicator" style="height: 8px; width: 8px;"></span>
+		<!-- <span class="session-state-indicator" style="height: 8px; width: 8px;"></span> -->
 
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+		<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
-		</button>
+		</button> -->
 
 		<div id="mob-menu" data-visible="false" class="mob-menu">
 			<?php

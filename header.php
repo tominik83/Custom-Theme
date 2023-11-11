@@ -15,16 +15,17 @@
 		<div class="version-info flex">
 
 			<?php
-			$theme_version_shortcode = '[theme_version]';
-			echo do_shortcode($theme_version_shortcode);
+			$notification_shortcode = get_option('notification_shortcode', '');
+			echo do_shortcode($notification_shortcode);
 			?>
+
 
 		</div>
 
 
 		<nav id="site-navigacija" class="site-navigacija flex">
 
-			<div class="site-branding">
+			<div class="site-branding flex">
 				<?php
 				the_custom_logo();
 				if (is_front_page() && is_home()) :
@@ -36,6 +37,8 @@
 					<p class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></p>
 				<?php
 				endif;
+				
+
 				$customtheme_description = get_bloginfo('description', 'display');
 				if ($customtheme_description || is_customize_preview()) :
 				?>
@@ -65,11 +68,11 @@
 			<div class="bar3"></div>
 		</div>
 
-		<span class="session-state-indicator" style="height: 8px; width: 8px;"></span>
+		<!-- <span class="session-state-indicator" style="height: 8px; width: 8px;"></span> -->
 
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+		<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
-		</button>
+		</button> -->
 
 		<div id="mob-menu" data-visible="false" class="mob-menu">
 			<?php

@@ -13,10 +13,22 @@ Template Name: About Us
 
     <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
 
+    <p id="client-ip" class="client-ip">IP adress</p>
 
+    <?php 
+    $theme_version_down_shortcode = '[theme_version]';
+    echo do_shortcode($theme_version_down_shortcode);
+    
+    ?>
 
-      <p id="client-ip">IP adress</p>
+    <!-- <?php
+    $plugin_version_shortcode = '[update-msg]';
+    echo do_shortcode($plugin_version_shortcode);
+    ?> -->
 
+    <!-- <?php
+    theme_update_check_show();
+    ?> -->
 
 
 
@@ -54,19 +66,10 @@ Template Name: About Us
     ?> -->
 
 
-
-    <!-- <div class="version-info flex">
-        <?php
-        $theme_version_shortcode = '[theme_version]';
-        echo do_shortcode($theme_version_shortcode);
-        ?>
-    </div> -->
-
     <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
 
     <h1 class="animate__animated animate__bounce">An animated element</h1>
 
-    <!-- <div style="width: 400px; height:100px; background-color: #fff" aria-hidden="true" class="div-spacer"></div> -->
 
     <?php if (have_posts()):
         while (have_posts()):
@@ -77,6 +80,9 @@ Template Name: About Us
         <?php endwhile;
     else:
     endif; ?>
+
+
+
 
     <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
 </div>
