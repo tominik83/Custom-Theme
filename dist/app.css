@@ -1,9 +1,5 @@
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap);
 @charset "UTF-8";
-#wpwrap #wpcontent #wpbody #wpbody-content .theme_admin {
-  background-color: #c20000;
-}
-
 :root {
   --animate-duration: 1s;
   --animate-delay: 1s;
@@ -1744,7 +1740,7 @@ header .site-navigacija {
   width: 100%;
   list-style: none;
   text-decoration: none;
-  padding: 0 350px;
+  padding: 0 50px;
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
@@ -1811,10 +1807,46 @@ header .nav-menu ul .current-menu-item a {
   font-weight: 400;
 }
 
-.custom-logo-link {
+header .custom-logo-link {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+header .custom-logo {
+  border-radius: 20px;
+}
+
+header .notification-bar {
+  display: flex;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-right: 2px solid rgba(255, 255, 255, 0.288);
+  border-color: black;
+  justify-content: center;
+  align-items: center;
+}
+
+header .update-available {
+  display: none;
+}
+
+header .describe {
+  display: none;
+}
+
+header .download-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #afa84c; /* Zelena boja za dugme za preuzimanje */
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+header .download-button:hover {
+  background-color: #45a049; /* Zamena boje na hover */
 }
 
 @media (max-width: 768px) {
@@ -2167,16 +2199,6 @@ body {
   color: #fff;
 }
 
-header .version-info {
-  display: flex;
-  flex-direction: row;
-  padding-right: 10px;
-  padding-left: 10px;
-  border-right: 2px solid rgba(255, 255, 255, 0.288);
-  border-color: black;
-  color: #c20000;
-}
-
 .mob-menu {
   display: none;
 }
@@ -2188,4 +2210,33 @@ header .version-info {
 .about-container .client-ip {
   color: #fff;
   font-weight: 400;
+}
+
+.update-available {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff0000; /* Crvena boja za obaveštenje o dostupnom ažuriranju */
+}
+
+.describe {
+  margin-bottom: 10px;
+}
+
+.download-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Zelena boja za dugme za preuzimanje */
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.download-button:hover {
+  background-color: #45a049; /* Zamena boje na hover */
+}
+
+body .wp-body {
+  background-color: #222522; /* Zamenite #your-color sa željenom bojom pozadine */
+  /* Dodajte ostale stilove za pozadinu prema vašim željama, npr. background-image, background-repeat, itd. */
 }

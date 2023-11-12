@@ -12,23 +12,14 @@
 
 	<header id="header" class="header">
 
-		<div class="version-info">
-
-			<!-- <?php
-
-
-			// $notification_shortcode = get_option('my_theme_update_available', '');
-			$notification_shortcode = '[theme_version]';
-			echo do_shortcode($notification_shortcode);
-			?> -->
+		<div class="notification-bar">
 
 			<?php
-			// Otvaranje PHP bloka
-			
-			// Umetanje funkcije theme_update_check_show()
-			theme_update_check_show();
 
-			// Zatvaranje PHP bloka
+
+			// // $notification_shortcode = get_option('my_theme_update_available', '');
+			// $notification_shortcode = '[theme_version]';
+			// echo do_shortcode($notification_shortcode);
 			?>
 
 

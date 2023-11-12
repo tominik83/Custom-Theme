@@ -23,10 +23,11 @@ project/
 
 ├── inc/
     ├── admin/admin_panel.php
+    ├── admin/required-github.php
+    ├── admin/required-new-version.php
+    ├── admin/required-plugins.php
+    ├── admin/theme_startup.php
     ├── img/
-    ├── required-github.php
-    ├── required-new-version.php
-    ├── required-plugins.php
     ├── section-blog.php
     └── section-contect.php
     
@@ -55,6 +56,7 @@ project/
 ├── header.php
 ├── index.php
 ├── page.php
+├── README.md
 ├── readme.txt
 ├── sceenshot.png
 ├── search.php
