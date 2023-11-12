@@ -10,17 +10,17 @@
 
 <body>
 
-	<header id="header" class="header">
+	<header id="header" class="header flex">
 
 		<div class="notification-bar">
 
-			<?php
+			<!-- <?php
 
-
-			// // $notification_shortcode = get_option('my_theme_update_available', '');
-			// $notification_shortcode = '[theme_version]';
-			// echo do_shortcode($notification_shortcode);
-			?>
+			theme_update_version_down()
+				// // $notification_shortcode = get_option('my_theme_update_available', '');
+				// $notification_shortcode = '[theme_version]';
+				// echo do_shortcode($notification_shortcode);
+				?> -->
 
 
 

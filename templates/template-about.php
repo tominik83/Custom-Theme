@@ -15,10 +15,10 @@ Template Name: About Us
 
     <p id="client-ip" class="client-ip">IP adress</p>
 
-    <?php
+    <!-- <?php
     theme_update_version_down()
 
-        ?>
+        ?> -->
 
 
 

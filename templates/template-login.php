@@ -19,7 +19,9 @@ Template Name: Login
     <?php 
         // Plugin je instaliran i aktivan, možete dodati kod za obradu
         $log_reg_shortcode = '[log-reg-form]';
+        // $log_reg_update = '[log-reg-update]';
         echo do_shortcode($log_reg_shortcode);
+        // echo do_shortcode($log_reg_update);
         ?>
     <?php else : ?>
         <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
