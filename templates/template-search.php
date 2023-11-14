@@ -18,7 +18,7 @@ Template Name: Search
 
     <?php endwhile;
     else : endif; ?>
-
+    <input type="text" name="search" placeholder="Search..">
     <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
 </div>
 

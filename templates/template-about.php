@@ -13,7 +13,7 @@ Template Name: About Us
 
     <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
 
-    <p id="client-ip" class="client-ip">IP adress</p>
+    <h3 id="client-ip" class="client-ip">IP adress</h3>
 
     <!-- <?php
     theme_update_version_down()
@@ -21,7 +21,7 @@ Template Name: About Us
         ?> -->
 
 
-
+    <input type="text" onfocus="this.value=''" value="Blabla">
 
 
     <div style="height:100px" aria-hidden="true" class="div-spacer"></div>

@@ -12,23 +12,7 @@
 
 	<header id="header" class="header flex">
 
-		<div class="notification-bar">
-
-			<!-- <?php
-
-			theme_update_version_down()
-				// // $notification_shortcode = get_option('my_theme_update_available', '');
-				// $notification_shortcode = '[theme_version]';
-				// echo do_shortcode($notification_shortcode);
-				?> -->
-
-
-
-
-		</div>
-
-
-		<nav id="site-navigacija" class="site-navigacija">
+		<nav id="site-navigacija" class="site-navigacija flex">
 
 			<div class="site-branding flex">
 				<?php
@@ -59,13 +43,13 @@
 				?>
 			</div>
 
-			<div class="nav-menu">
+			<div class="nav-menu flex">
 
 				<?php
 				wp_nav_menu(
 					array(
 						'theme_location' => 'header-menu',
-						'menu_class' => 'header-menu'
+						'menu_class' => 'header-menu flex'
 					)
 				);
 				?>
@@ -79,6 +63,7 @@
 			<div class="bar3"></div>
 		</div>
 
+		
 		<!-- <span class="session-state-indicator" style="height: 8px; width: 8px;"></span> -->
 
 		<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">

@@ -10,51 +10,46 @@
 
 <body>
 
-	<header id="header" class="header">
-
-		<div class="version-info flex">
-
-			<?php
-			$notification_shortcode = get_option('notification_shortcode', '');
-			echo do_shortcode($notification_shortcode);
-			?>
-
-
-		</div>
-
+	<header id="header" class="header flex">
 
 		<nav id="site-navigacija" class="site-navigacija flex">
 
 			<div class="site-branding flex">
 				<?php
 				the_custom_logo();
-				if (is_front_page() && is_home()) :
-				?>
-					<h1 class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
-				<?php
-				else :
-				?>
-					<p class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></p>
-				<?php
+				if (is_front_page() && is_home()):
+					?>
+					<h1 class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+							<?php bloginfo('name'); ?>
+						</a></h1>
+					<?php
+				else:
+					?>
+					<p class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+							<?php bloginfo('name'); ?>
+						</a></p>
+					<?php
 				endif;
-				
+
 
 				$customtheme_description = get_bloginfo('description', 'display');
-				if ($customtheme_description || is_customize_preview()) :
-				?>
-					<p class="site-description"><?php echo $customtheme_description; ?></p>
-				<?php
+				if ($customtheme_description || is_customize_preview()):
+					?>
+					<p class="site-description">
+						<?php echo $customtheme_description; ?>
+					</p>
+					<?php
 				endif;
 				?>
 			</div>
 
-			<div class="nav-menu">
+			<div class="nav-menu flex">
 
 				<?php
 				wp_nav_menu(
 					array(
 						'theme_location' => 'header-menu',
-						'menu_class' => 'header-menu'
+						'menu_class' => 'header-menu flex'
 					)
 				);
 				?>
@@ -68,6 +63,7 @@
 			<div class="bar3"></div>
 		</div>
 
+		
 		<!-- <span class="session-state-indicator" style="height: 8px; width: 8px;"></span> -->
 
 		<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">

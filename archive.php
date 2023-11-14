@@ -1,6 +1,6 @@
 <?php get_template_part('templates/template', 'archive'); ?>
 
-<?php
+<!-- <?php
 $github_username = 'tominik83';
 $github_repo = 'WordPress-Plugins';
 
@@ -17,4 +17,4 @@ if (is_wp_error($response)) {
     echo 'Opis: ' . $data['body'];
 }
 
-?>
+?> -->
