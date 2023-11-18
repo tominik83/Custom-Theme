@@ -9,11 +9,11 @@ Template Name: Contact Us
 
 <div class="contact-container flex">
 
-    <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
+    <!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
 
     <h1 class="animate__animated animate__bounce">An animated element</h1>
 
-    <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
+    <!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
     
     <!-- <canvas id="canvas"></canvas> -->
 
@@ -24,7 +24,7 @@ Template Name: Contact Us
     <?php endwhile;
     else : endif; ?>
 
-    <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
+    <!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
 </div>
 
 

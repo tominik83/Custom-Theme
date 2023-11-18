@@ -11,9 +11,9 @@ Template Name: About Us
 <div class="about-container flex">
 
 
-    <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
+    <!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
 
-    <h3 id="client-ip" class="client-ip">IP adress</h3>
+    <p id="client-ip" class="client-ip h4">IP Adress</p>
 
     <!-- <?php
     theme_update_version_down()
@@ -21,10 +21,10 @@ Template Name: About Us
         ?> -->
 
 
-    <input type="text" onfocus="this.value=''" value="Blabla">
+    <!-- <input type="text" onfocus="this.value=''" value="Blabla"> -->
 
 
-    <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
+    <!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
 
     <h1 class="animate__animated animate__bounce">An animated element</h1>
 

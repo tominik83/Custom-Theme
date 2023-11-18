@@ -49,7 +49,10 @@
 				wp_nav_menu(
 					array(
 						'theme_location' => 'header-menu',
-						'menu_class' => 'header-menu flex'
+						'menu_class' => 'header-menu flex',
+						// 'container' => '',
+						// 'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+						// 'walker' => new nav_Walker(),
 					)
 				);
 				?>
@@ -74,7 +77,7 @@
 			<?php
 			wp_nav_menu(
 				array(
-					// 'menu' => 'primay',
+					// 'menu' => 'primary',
 					'theme_location' => 'mobile-menu',
 					'menu_class' => 'phone-menu',
 					// 'container' => '',

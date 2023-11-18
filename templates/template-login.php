@@ -9,7 +9,7 @@ Template Name: Login
 
 <div class="login-container flex">
 
-    <div style="height:100px" aria-hidden="true" class=" div-spacer "></div>
+    <!-- <div style="height:100px" aria-hidden="true" class=" div-spacer "></div> -->
     
     <?php
     // Provera da li je plugin instaliran
@@ -48,7 +48,7 @@ Template Name: Login
 
 
 
-    <div style="height:100px" aria-hidden="true" class=" div-spacer "></div>
+    <!-- <div style="height:100px" aria-hidden="true" class=" div-spacer "></div> -->
 
 </div>
 

@@ -10,7 +10,7 @@ Template Name: Single
 
 <div class="single-container flex">
 
-    <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
+    <!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
 
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
@@ -19,7 +19,7 @@ Template Name: Single
     <?php endwhile;
     else : endif; ?>
 
-    <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
+    <!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
 </div>
 
 

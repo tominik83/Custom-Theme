@@ -8,18 +8,22 @@ Template Name: Custom Page
 
 <?php get_header(); ?>
 
-<div class="page-container flex">
+<div class="diy-container flex">
 
-
-    <!-- <div class="container">
-        <div class="sphere" id="sphere">
-            <?php
-            for ($i = 1; $i <= 10; $i++) {
-                echo "<div class='field' id='field$i'>$i</div>";
-            }
-            ?>
+    <div class="timeline">
+        <div class="container left">
+            <div class="content">
+                <h2>2017</h2>
+                <p>Lorem ipsum..</p>
+            </div>
         </div>
-    </div> -->
+        <div class="container right">
+            <div class="content">
+                <h2>2016</h2>
+                <p>Lorem ipsum..</p>
+            </div>
+        </div>
+    </div>
 
 
 
