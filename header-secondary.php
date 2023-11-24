@@ -50,43 +50,41 @@
 					array(
 						'theme_location' => 'header-menu',
 						'menu_class' => 'header-menu flex',
+						// 'walker' => new header_Walker(),
+					)
+				);
+				?>
+
+			</div>
+
+
+			<div class="hamburger" aria-controls="mob-menu" aria-expanded="false">
+				<div class="bar1"></div>
+				<div class="bar2"></div>
+				<div class="bar3"></div>
+			</div>
+
+
+			<!-- <span class="session-state-indicator" style="height: 8px; width: 8px;"></span> -->
+
+			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button> -->
+
+			<div id="mob-menu" data-visible="false" class="mob-menu">
+				<?php
+				wp_nav_menu(
+					array(
+						// 'menu' => 'primary',
+						'theme_location' => 'mobile-menu',
+						'menu_class' => 'phone-menu',
 						// 'container' => '',
 						// 'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-						// 'walker' => new nav_Walker(),
+						'walker' => new mob_Walker(),
 					)
 				);
 				?>
 			</div>
-
-		</nav>
-
-		<div class="hamburger" aria-controls="mob-menu" aria-expanded="false">
-			<div class="bar1"></div>
-			<div class="bar2"></div>
-			<div class="bar3"></div>
-		</div>
-
-		
-		<!-- <span class="session-state-indicator" style="height: 8px; width: 8px;"></span> -->
-
-		<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button> -->
-
-		<div id="mob-menu" data-visible="false" class="mob-menu">
-			<?php
-			wp_nav_menu(
-				array(
-					// 'menu' => 'primary',
-					'theme_location' => 'mobile-menu',
-					'menu_class' => 'phone-menu',
-					// 'container' => '',
-					// 'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-					// 'walker' => new mob_Walker(),
-				)
-			);
-			?>
-		</div>
 
 
 	</header>

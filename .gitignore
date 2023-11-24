@@ -62,3 +62,4 @@ theme.json.disable
 .gitignore
 .vscode
 *.disable
+hotspot/

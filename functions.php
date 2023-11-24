@@ -94,6 +94,10 @@ function theme_update_version_admin_page()
 
 
 
+
+
+
+
 function theme_update_version_down()
 {
     // Provjera da li je korisnik prijavljen i ima određenu ulogu
@@ -279,3 +283,13 @@ add_action('wp_enqueue_scripts', 'wp_style_scripts');
 // }
 
 // add_action('init', 'require_plugin');
+
+
+
+
+function require_nav_walker()
+{
+    require_once get_template_directory() . '/inc/custom-nav-walker.php';
+}
+
+add_action('init', 'require_nav_walker');
