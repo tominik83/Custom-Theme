@@ -51,6 +51,8 @@ wp-config.php
 /wp-content/plugins/media-sync
 /wp-content/plugins/radio-player
 /wp-content/plugins/deep-amplitude
+/wp-content/plugins/log-reg
+/wp-content/plugins/hotspot
 node_modules
 src
 package-lock.json

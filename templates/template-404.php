@@ -11,11 +11,11 @@ Template Name: 404
 
 <div id="primary" class="content-area flex">
 
-    <header class="page-header">
+    <!-- <header class="page-header">
         <h1 class="page-title">
             <?php _e('NOT FOUND', 'custom-theme'); ?>
         </h1>
-    </header>
+    </header> -->
 
 
     <div class="page-content flex">

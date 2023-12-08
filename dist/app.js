@@ -151,6 +151,32 @@ document.addEventListener("DOMContentLoaded", function () {
 //     }
 // });
 
+// Add this JavaScript code
+jQuery(document).ready(function ($) {
+  $('#activate-plugin-button').on('click', function () {
+    if (confirm("Do you want to install and activate the plugin?")) {
+      // Trigger an AJAX request to install and activate the plugin
+      $.ajax({
+        url: ajaxurl,
+        // WordPress AJAX URL
+        type: 'GET',
+        data: {
+          action: 'install_and_activate_plugin'
+        },
+        success: function success(response) {
+          alert(response); // Display the response (success or error message)
+        },
+
+        error: function error(_error) {
+          console.error(_error);
+        }
+      });
+    } else {
+      alert("Plugin installation and activation canceled by the user.");
+    }
+  });
+});
+
 /***/ }),
 
 /***/ "./src/app.scss":

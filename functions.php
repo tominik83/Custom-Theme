@@ -1,38 +1,37 @@
 <?php
 
+/**
+ * Custom Theme functions and definitions
+ *
+ * @link https://dev.bibliotehnika.tk/themes/basics/theme-functions/
+ *
+ * @package Custom Theme
+ * @since Custom Theme 1.0
+ */
+
+
+
+
+
+
+
 // error_reporting(E_ALL);
 
 
 function theme_settings_page()
 {
-    add_menu_page('theme-settings', 'Theme Options', 'manage_options', 'theme-settings', 'theme_option_form');
-    add_submenu_page('theme-settings', 'Style', 'Style', 'manage_options', 'theme-settings-submenu-1', 'theme_submenu_page_1');
-    add_submenu_page('theme-settings', 'Settings', 'Settings', 'manage_options', 'theme-settings-settings', 'admin_submenu_settings');
+    add_menu_page('theme-settings', 'Theme Panel', 'manage_options', 'theme-settings', 'theme_option_form');
+    add_submenu_page('theme-settings', 'Style', 'Style', 'manage_options', 'theme-settings-style', 'theme_submenu_style');
+    add_submenu_page('theme-settings', 'Settings', 'Settings', 'manage_options', 'theme-settings-settings', 'theme_submenu_settings');
     add_submenu_page('theme-settings', 'Theme Update', 'Theme Update', 'manage_options', 'theme-update', 'theme_update_version_admin_page');
 }
 add_action('admin_menu', 'theme_settings_page');
 
 function theme_option_form()
 {
-    ?>
-    <div class="wrap">
-        <h2>Welcome to Custom Theme</h2>
-        <form method="post" action="options.php">
-            <?php settings_fields('theme-settings-group'); ?>
-            <?php do_settings_sections('theme-settings-group'); ?>
-            <table class="form-table">
-                <tr valign="top">
-                    <th scope="row">Notification Bar</th>
-                    <td>
-                        <input type="text" name="notification_shortcode"
-                            value="<?php echo esc_attr(get_option('notification_shortcode')); ?>" />
-                    </td>
-                </tr>
-            </table>
-            <?php submit_button(); ?>
-        </form>
-    </div>
-    <?php
+
+    require get_template_directory() . '/inc/admin/admin_panel.php';
+
 }
 
 function theme_settings_init()
@@ -42,34 +41,56 @@ function theme_settings_init()
 }
 add_action('admin_init', 'theme_settings_init');
 
-function theme_submenu_page_1()
+function theme_submenu_style()
 {
-    // Kod za sadržaj prve podstranice
-    echo '<div class="wrap-style">
-    <h2>Submenu Page 1</h2><p>Sadržaj prve podstranice ovde.</p></div>';
+    require get_template_directory() . '/inc/admin/admin_template_style.php';
+
 }
 
-function admin_submenu_settings()
+function theme_submenu_settings()
 {
-    admin_panel();
+    require get_template_directory() . '/inc/admin/admin_settings.php';
+
 }
 
-function admin_panel()
-{
-    require get_template_directory() . '/inc/admin/admin_panel.php';
-}
-
-// add_action('init', 'admin_panel');
 
 function theme_update_version_admin_page()
 {
-    ?>
-    <div class="wrap-settings">
-        <h1>Theme Update</h1>
-        <p>Your theme is up to date. You can customize this page with additional update information.</p>
-    </div>
-    <?php
+    require get_template_directory() . '/inc/admin/admin_update.php';
+
+    add_menu_page(
+        'Theme Update Page',
+        'Theme Update <span class="update-plugins count-1"><span class="update-count">1</span></span>',
+        'manage_options',
+        'theme_update_page',
+        'theme_update_version_admin_page',
+        'dashicons-update',
+        20
+    );
 }
+
+
+
+
+
+
+
+// Dodajte akciju za prikazivanje admin stranice
+// add_action('admin_menu', 'theme_update_add_admin_page');
+
+// function theme_update_add_admin_page()
+// {
+//     add_menu_page(
+//         'Theme Update Page',
+//         'Theme Update',
+//         'manage_options',
+//         'theme_update_page',
+//         'theme_update_version_admin_page',
+//         'dashicons-update',
+//         20
+//     );
+// }
+
 
 // function custom_admin_styles() {
 //     echo '<style>
@@ -85,211 +106,179 @@ function theme_update_version_admin_page()
 
 
 
+function promeni_ime_navigacionog_linka($items, $args)
+{
+    // Proveri da li je korisnik prijavljen
+    if (is_user_logged_in()) {
+        // Pronađi link koji ima tekst "Neki Link" i promeni ga u "Logout"
+        foreach ($items as $item) {
+            if ($item->title == 'Get In') {
+                $item->title = 'Logout';
+                break;
+            }
+        }
+    }
+
+    return $items;
+}
+
+add_filter('wp_nav_menu_objects', 'promeni_ime_navigacionog_linka', 10, 2);
 
 
 
 
+function ogranicenje_pristupa_stranicama()
+{
+
+    $plugin_path = 'log-reg/log-reg.php';
+    include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+    // Proveri da li je plugin instaliran
+    if (function_exists('is_plugin_active') && is_plugin_active($plugin_path)) {
+        // Proveri da li trenutna stranica nije početna
+        if (!is_front_page()) {
+            // Proveri da li korisnik nije prijavljen i nije na stranici "get-in"
+            if (!is_user_logged_in() && !is_page('get-in')) {
+                // Ako nije prijavljen i nije na stranici "get-in", preusmeri ga na početnu stranicu
+                wp_redirect(home_url('/get-in'));
+                exit;
+            }
+        }
+
+    }
+}
+
+add_action('template_redirect', 'ogranicenje_pristupa_stranicama');
+// Dodajte akciju za provjeru ažuriranja prilikom inicijalizacije admin dijela
+add_action('admin_init', 'theme_update_version_down');
 
 
 
-
-
-
-
-
-
+// Funkcija za provjeru ažuriranja
 function theme_update_version_down()
 {
-    // Provjera da li je korisnik prijavljen i ima određenu ulogu
-    // if (is_user_logged_in() && (current_user_can('subscriber') || current_user_can('editor'))) {
     $github_username = 'tominik83';
     $github_repo = 'Custom-Theme';
-
     $url = "https://api.github.com/repos/$github_username/$github_repo/releases/latest";
-
     $headers = array(
         'User-Agent: Custom-Theme',
-        // Ime aplikacije - repository
     );
-
-    $response = wp_safe_remote_request($url, array('headers' => $headers));
+    $request_args = array(
+        'timeout' => 60,
+    );
+    $response = wp_safe_remote_request($url, array('headers' => $headers, $request_args));
 
     if (is_wp_error($response)) {
-        // Prikaz poruke o grešci
         echo '<p class="error-msg">Error</p>';
     } else {
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
 
         if ($data && isset($data['tag_name'])) {
-            // Informacije o novom izdanju
             $latest_version = esc_html($data['tag_name']);
             $release_notes = esc_html($data['body']);
-
-            // Download link za najnovije izdanje
             $download_link = "https://github.com/$github_username/$github_repo/archive/refs/tags/$latest_version.zip";
 
-            // Provjera ažuriranja
             $theme = wp_get_theme();
             $current_version = $theme->get('Version');
+
+            add_meta_box(
+                'theme_update_metabox',
+                'Theme Update Information',
+                'display_theme_update_info',
+                'dashboard',
+                'normal',
+                'high'
+            );
+
+            global $theme_update_data;
+            $theme_update_data = compact('latest_version', 'release_notes', 'download_link', 'current_version');
+
             if (version_compare($latest_version, $current_version, '>')) {
-                // echo '<p class="update-available"> Update Available: ' . esc_html($latest_version) . '</p>';
-                // echo '<p class="describe">Description: ' . esc_html($release_notes) . '</p>';
-                echo '<a href="' . $download_link . '" class="download-button"><span class="download-icon">⬇️</span>Download</a>';
-                echo 'Theme Version: ' . $latest_version;
+                update_user_meta(get_current_user_id(), 'theme_update_available', true);
+                $counts = array(); // Initialize $counts
+                add_filter('update_count', 'theme_update_count', 10, 1);
             }
-            // else {
-            //     echo '<p class="update-available">Up to date</p>';
-            // }
         }
     }
-    // } 
-    // else {
-    //     // Korisnik nije prijavljen ili nema odgovarajuću ulogu
-    //     echo '<p class="error-msg">You must be logged in with the appropriate role to view this information.</p>';
-    // }
 }
-// Dodavanje funkcije na određeno mesto, npr. u functions.php teme
-add_action('admin_notices', 'theme_update_version_down');
-// add_shortcode('theme_version', 'theme_update_version_down');
 
-// function theme_update_version_admin_notice()
-// {
-//     if (!current_user_can('manage_options')) {
-//         return; // Ako korisnik nema dozvolu za upravljanje opcijama, izlaz iz funkcije
-//     }
-
-//     $github_username = 'tominik83';
-//     $github_repo = 'Custom-Theme';
-
-//     $url = "https://api.github.com/repos/$github_username/$github_repo/releases/latest";
-
-//     $headers = array(
-//         'User-Agent: Custom-Theme',
-//         // Ime aplikacije - repository
-//     );
-
-//     $response = wp_safe_remote_request($url, array('headers' => $headers));
-
-//     if (is_wp_error($response)) {
-//         // Prikaz poruke o grešci
-//         return;
-//     }
-
-//     $body = wp_remote_retrieve_body($response);
-//     $data = json_decode($body, true);
-
-//     if ($data && isset($data['tag_name'])) {
-//         // Informacije o novom izdanju
-//         $latest_version = esc_html($data['tag_name']);
-
-//         // Provjera ažuriranja
-//         $theme = wp_get_theme();
-//         $current_version = $theme->get('Version');
-//         if (version_compare($latest_version, $current_version, '>')) {
-//             $update_url = wp_nonce_url(admin_url('themes.php?page=theme-update'), 'theme-update-nonce');
-//             $message = sprintf(
-//                 'New version %s is available! <a href="%s">Update now</a>.',
-//                 esc_html($latest_version),
-//                 esc_url($update_url)
-//             );
-//             echo '<div class="notice notice-info is-dismissible"><p>' . $message . '</p></div>';
-//         }
-//     }
-// }
-// add_action('admin_notices', 'theme_update_version_admin_notice');
-
-
-
-
-
-
-
-
-
-function my_theme_support()
+// Funkcija za prikaz metabox-a na dashboardu
+function display_theme_update_info()
 {
+    global $theme_update_data;
 
-    // Dodaje dinamicno ime stranice
-    add_theme_support('tittle-tag');
-    add_theme_support(
-        'custom-logo',
-        array(
-            'height' => 40,
-            // Visina loga (promenite prema svojim potrebama)
-            'width' => 40,
-            // Širina loga (promenite prema svojim potrebama)
-            // 'flex-height' => true,
-        )
-    );
+    $output = '';
 
-    // Menu Support
-    add_theme_support('menus');
+    if ($theme_update_data) {
+        $output .= '<p>Theme Version: ' . esc_html($theme_update_data['latest_version']) . '</p>';
+        $output .= '<p>Description: ' . esc_html($theme_update_data['release_notes']) . '</p>';
 
-    register_nav_menus(
-        array(
-            'header-menu' => 'Header Menu Location',
-            'footer-menu' => 'Footer Menu Location',
-            'mobile-menu' => 'Mobile Menu Location',
-        )
-    );
+        if (get_user_meta(get_current_user_id(), 'theme_update_available', true)) {
+            $output .= '<a href="' . $theme_update_data['download_link'] . '" class="button">Download Update</a>';
+        } else {
+            $output .= '<p>Your theme is up to date.</p>';
+        }
+    }
+
+    echo $output;
 }
 
-add_action('after_setup_theme', 'my_theme_support');
-
-
-
-
-
-/**
- * Enqueue scripts and styles.
- */
-function wp_style_scripts()
+// Funkcija za dinamički prikazivanje broja ažuriranja teme
+function theme_update_count($counts)
 {
+    $theme_update_available = get_user_meta(get_current_user_id(), 'theme_update_available', true);
 
-    $version = wp_get_theme()->get('Version');
+    if (!isset($counts['themes'])) {
+        $counts['themes'] = 0;
+    }
 
-    wp_register_style('main-style', get_template_directory_uri() . '/dist/app.css', array(), $version, 'all');
-    wp_enqueue_style('main-style');
+    $counts['themes'] += $theme_update_available ? 1 : 0;
 
-    // wp_enqueue_scripts('jquery');
-    wp_register_script('app-script', get_stylesheet_directory_uri() . '/dist/app.js', array('jquery'), $version, true);
-    wp_enqueue_script('app-script');
+    return $counts;
 }
-add_action('wp_enqueue_scripts', 'wp_style_scripts');
 
-// class mob_Walker extends Walker_Nav_Menu
+
+
+
+function display_theme_update_notification($admin_bar)
+{
+    global $theme_update_data;
+
+    if ($theme_update_data) {
+        $admin_bar->add_node(
+            array(
+                'id' => 'theme-update-notification',
+                'title' => '<span class="ab-icon"></span><span class="ab-label">Theme Update Available</span>',
+                'href' => admin_url('update-core.php'),
+                'meta' => array(
+                    'class' => 'theme-update-notification',
+                ),
+            )
+        );
+    }
+}
+
+
+function display_update_notification()
+{
+    ?>
+    <div class="notice notice-warning is-dismissible">
+        <p>Nova verzija teme je dostupna! <a href="https://github.com/tominik83/Custom-Theme/releases/latest"
+                target="_blank">Ažurirajte sada</a>.</p>
+    </div>
+    <?php
+}
+
+
+
+
+
+// function require_nav_walker()
 // {
-//     public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0)
-//     {
-//         // Prilagodite ovo prema vašim potrebama
-//         $classes = empty($item->classes) ? array() : (array) $item->classes;
-//         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
-
-//         $output .= '<li id="menu-item-' . $item->ID . '" class="' . esc_attr($class_names) . '">';
-//         $output .= '<a href="' . esc_url($item->url) . '">';
-
-//         // Dodajte stilove prema vašim potrebama
-//         $output .= '';
-
-//         $output .= esc_html($item->title);
-//         $output .= '</span></a>';
-//     }
+//     require_once get_template_directory() . '/inc/custom-nav-walker.php';
 // }
 
-// function require_plugin()
-// {
+// add_action('init', 'require_nav_walker');
+
+require_once get_template_directory() . '/inc/admin/theme_startup.php';
 //     require_once get_template_directory() . '/inc/required-plugins.php';
-// }
-
-// add_action('init', 'require_plugin');
-
-
-
-
-function require_nav_walker()
-{
-    require_once get_template_directory() . '/inc/custom-nav-walker.php';
-}
-
-add_action('init', 'require_nav_walker');

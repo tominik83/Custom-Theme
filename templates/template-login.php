@@ -31,13 +31,13 @@ Template Name: Login
             include_once(ABSPATH . 'wp-admin/includes/plugin.php');
             if (function_exists('is_plugin_active') && is_plugin_active($plugin_path)) {
                 // Plugin je instaliran i aktivan
-                echo "Plugin is installed and active.";
+                echo "The plugin is installed and active.";
             } elseif (file_exists(WP_PLUGIN_DIR . '/' . $plugin_path)) {
                 // Plugin je instaliran ali nije aktivan
-                echo "Plugin is installed, but not active.";
+                echo "The plugin is installed but not active.";
             } else {
                 // Plugin nije instaliran
-                echo "Plugin isn't installed.";
+                echo "The plugin is not installed.";
             }
         }
         ?>

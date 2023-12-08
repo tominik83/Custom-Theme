@@ -1,1 +1,1 @@
-<?php get_template_part('templates/template', 'custom-page'); ?>
+<?php get_template_part('inc/section', 'default-page');?>

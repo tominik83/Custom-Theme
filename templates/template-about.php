@@ -15,10 +15,15 @@ Template Name: About Us
 
     <p id="client-ip" class="client-ip h4">IP Adress</p>
 
-    <!-- <?php
-    theme_update_version_down()
+    <?php
+    display_theme_update_info()
 
-        ?> -->
+        ?>
+
+    <?php
+    $notification_shortcode = get_option('notification_shortcode', '');
+    echo do_shortcode($notification_shortcode);
+    ?>
 
 
     <!-- <input type="text" onfocus="this.value=''" value="Blabla"> -->
