@@ -5,7 +5,8 @@
  *
  * @link https://dev.bibliotehnika.tk/themes/basics/theme-functions/
  *
- * @package Custom Theme
+ * @package Wordpress
+ * @subpackage Custom Theme
  * @since Custom Theme 1.0
  */
 
@@ -15,7 +16,7 @@
 
 
 
-// error_reporting(E_ALL);
+error_reporting(E_ALL);
 
 
 function theme_settings_page()

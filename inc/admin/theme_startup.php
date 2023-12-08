@@ -24,14 +24,27 @@ function my_theme_support()
 
     // Dodaje dinamicno ime stranice
     add_theme_support('tittle-tag');
+
+    add_theme_support(
+        'html5',
+        array(
+            'comment-form',
+            'comment-list',
+            'gallery',
+            'caption',
+            'script',
+            'style',
+            'navigation-widgets',
+        )
+    );
+
+    // Add theme support for Custom Logo.
     add_theme_support(
         'custom-logo',
         array(
-            'height' => 40,
-            // Visina loga (promenite prema svojim potrebama)
-            'width' => 40,
-            // Širina loga (promenite prema svojim potrebama)
-            // 'flex-height' => true,
+            'width' => 250,
+            'height' => 250,
+            'flex-width' => true,
         )
     );
 
@@ -40,11 +53,54 @@ function my_theme_support()
 
     register_nav_menus(
         array(
-            'header-menu' => 'Header Menu Location',
-            'footer-menu' => 'Footer Menu Location',
-            'mobile-menu' => 'Mobile Menu Location',
+            'header-menu' => __( 'Header Menu Location', 'custom-theme'),
+            'footer-menu' => __( 'Footer Menu Location', 'custom-theme'),
+            'mobile-menu' => __( 'Mobile Menu Location', 'custom-theme'),
         )
     );
+
+    $starter_content = array(
+		// Set up nav menus for each of the two areas registered in the theme.
+		'nav_menus'   => array(
+			// Assign a menu to the "top" location.
+			'header-menu'    => array(
+				'name'  => __('Header Menu Location', 'custom-theme' ),
+				'items' => array(
+					'link_home', // Note that the core "home" page is actually a link in case a static front page is not used.
+					'page_about',
+					'page_blog',
+					'page_contact',
+				),
+			),
+
+			// Assign a menu to the "social" location.
+			'footer-menu' => array(
+				'name'  => __('Footer Menu Location', 'custom-theme' ),
+				'items' => array(
+					'link_yelp',
+					'link_facebook',
+					'link_twitter',
+					'link_instagram',
+					'link_email',
+				),
+			),
+		),
+	);
+
+	/**
+	 * Filters Custom Theme array of starter content.
+	 *
+	 * @since Custom Theme 1.1
+	 *
+	 * @param array $starter_content Array of starter content.
+	 */
+	$starter_content = apply_filters( 'custom_theme_starter_content', $starter_content );
+
+	add_theme_support( 'starter-content', $starter_content );
+
+
+
+
 }
 
 add_action('after_setup_theme', 'my_theme_support');
