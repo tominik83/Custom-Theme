@@ -53,9 +53,9 @@ function my_theme_support()
 
     register_nav_menus(
         array(
-            'header-menu' => __( 'Header Menu Location', 'custom-theme'),
-            'footer-menu' => __( 'Footer Menu Location', 'custom-theme'),
-            'mobile-menu' => __( 'Mobile Menu Location', 'custom-theme'),
+            'header-menu' => __( 'Header Menu Location', 'sas_theme'),
+            'footer-menu' => __( 'Footer Menu Location', 'sas_theme'),
+            'mobile-menu' => __( 'Mobile Menu Location', 'sas_theme'),
         )
     );
 
@@ -64,7 +64,7 @@ function my_theme_support()
 		'nav_menus'   => array(
 			// Assign a menu to the "top" location.
 			'header-menu'    => array(
-				'name'  => __('Header Menu Location', 'custom-theme' ),
+				'name'  => __('Header Menu Location', 'sas_theme' ),
 				'items' => array(
 					'link_home', // Note that the core "home" page is actually a link in case a static front page is not used.
 					'page_about',
@@ -75,7 +75,7 @@ function my_theme_support()
 
 			// Assign a menu to the "social" location.
 			'footer-menu' => array(
-				'name'  => __('Footer Menu Location', 'custom-theme' ),
+				'name'  => __('Footer Menu Location', 'sas_theme' ),
 				'items' => array(
 					'link_yelp',
 					'link_facebook',
