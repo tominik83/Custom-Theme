@@ -13,17 +13,19 @@ Template Name: About Us
 
     <!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
 
-    <p id="client-ip" class="client-ip h4">IP Adress</p>
+    <!-- <p id="client-ip" class="client-ip h4">IP Adress</p> -->
 
-    <?php
-    display_theme_update_info()
-
+        <?php
+        // Output information about the theme update
+        theme_versions_available(); // display_theme_update_info();
         ?>
 
-    <?php
+
+    <!-- <?php
     $notification_shortcode = get_option('notification_shortcode', '');
     echo do_shortcode($notification_shortcode);
-    ?>
+    ?> -->
+
 
 
     <!-- <input type="text" onfocus="this.value=''" value="Blabla"> -->
@@ -31,7 +33,7 @@ Template Name: About Us
 
     <!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
 
-    <h1 class="animate__animated animate__bounce">An animated element</h1>
+    <!-- <h1 class="animate__animated animate__bounce">An animated element</h1> -->
 
 
     <?php if (have_posts()):

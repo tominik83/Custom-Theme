@@ -94,7 +94,7 @@ function my_theme_support()
 	 *
 	 * @param array $starter_content Array of starter content.
 	 */
-	$starter_content = apply_filters( 'custom_theme_starter_content', $starter_content );
+	$starter_content = apply_filters( 'sas_theme_starter_content', $starter_content );
 
 	add_theme_support( 'starter-content', $starter_content );
 
