@@ -21,10 +21,39 @@ error_reporting(E_ALL);
 
 function theme_settings_page()
 {
-    add_menu_page('theme-settings', 'Theme Panel', 'manage_options', 'theme-settings', 'theme_option_form');
-    add_submenu_page('theme-settings', 'Style', 'Style', 'manage_options', 'theme-settings-style', 'theme_submenu_style');
-    add_submenu_page('theme-settings', 'Settings', 'Settings', 'manage_options', 'theme-settings-settings', 'theme_submenu_settings');
-    add_submenu_page('theme-settings', 'Theme Update', 'Theme Update', 'manage_options', 'theme-update', 'theme_update_version_admin_page');
+    add_menu_page(
+        'theme-panel',
+        'Custom Theme', 
+        'manage_options', 
+        'theme-panel', 
+        'theme_option_form'
+    );
+
+    
+    add_submenu_page(
+        'theme-panel', 
+        'Style', 
+        'Style', 
+        'manage_options', 
+        'theme-panel-style', 
+        'theme_submenu_style'
+    );
+    add_submenu_page(
+        'theme-panel', 
+        'Settings', 
+        'Settings', 
+        'manage_options', 
+        'theme-panel-settings', 
+        'theme_submenu_settings'
+    );
+    add_submenu_page(
+        'theme-panel', 
+        'Theme Update', 
+        'Theme Update', 
+        'manage_options', 
+        'theme-update', 
+        'theme_update_version_admin_page'
+    );
 }
 add_action('admin_menu', 'theme_settings_page');
 
@@ -35,12 +64,12 @@ function theme_option_form()
 
 }
 
-function theme_settings_init()
-{
-    register_setting('theme-settings-group', 'notification_shortcode');
-    register_setting('theme-settings-group', 'shortcode_location');
-}
-add_action('admin_init', 'theme_settings_init');
+// function theme_settings_init()
+// {
+//     register_setting('theme-panel-group', 'notification_shortcode');
+//     register_setting('theme-panel-group', 'shortcode_location');
+// }
+// add_action('admin_init', 'theme_settings_init');
 
 function theme_submenu_style()
 {
@@ -59,15 +88,6 @@ function theme_update_version_admin_page()
 {
     require get_template_directory() . '/inc/admin/admin_update.php';
 
-    add_menu_page(
-        'Theme Update Page',
-        'Theme Update <span class="update-plugins count-1"><span class="update-count">1</span></span>',
-        'manage_options',
-        'theme_update_page',
-        'theme_update_version_admin_page',
-        'dashicons-update',
-        20
-    );
 }
 
 
@@ -216,14 +236,14 @@ function theme_versions_available()
     $github_username = 'tominik83';
     $github_repo = 'Custom-Theme';
     // $token = "";
-    $server_url = "https://dev.bibliotehnika.tk/wp-json/themes/releases/data/";
+    $server_url = "http://dev.bibliotehnika.tk.test/wp-json/themes/releases/data/";
     $local_json_file = get_template_directory() . '/update/theme_release_data.json';
 
     // Check if local JSON file exists
-    if (file_exists($local_json_file)) {
-        $body = file_get_contents($local_json_file);
-        $data = json_decode($body, true);
-    } else {
+    // if (file_exists($local_json_file)) {
+    //     $body = file_get_contents($local_json_file);
+    //     $data = json_decode($body, true);
+    // } else {
         // Fetch data from the server if the local file doesn't exist
         $headers = array(
             'User-Agent: Custom-Theme',
@@ -231,7 +251,7 @@ function theme_versions_available()
         );
 
         $request_args = array(
-            'timeout' => 30,
+            'timeout' => 10,
         );
         $response = wp_safe_remote_request($server_url, array('headers' => $headers) + $request_args);
 
@@ -246,7 +266,7 @@ function theme_versions_available()
             // Save fetched data to local JSON file for future use
             file_put_contents($local_json_file, $body);
         }
-    }
+    // }
 
     if (is_array($data)) {
         $latest_download_link = null;
@@ -268,7 +288,14 @@ function theme_versions_available()
                     if ($theme_update_data) {
                         $output .= '<p>Theme Version: ' . esc_html($theme_update_data['tag_name']) . '</p>';
                         $output .= '<p>Description: ' . esc_html($theme_update_data['release_notes']) . '</p>';
-                        $output .= '<a href="' . $theme_update_data['latest_download_link'] . '" class="button">Download</a>';
+                        $theme_name = 'Custom-Theme';
+                        // $output .= '<a href="' . $theme_update_data['latest_download_link'] . '" class="button" download="' . $theme_name . '">Download</a>';
+
+                        
+
+                        // $output .= '<a href="' . $theme_update_data['latest_download_link'] . '" class="button">Download</a>';
+                        $output .= '<a href="' . $theme_update_data['latest_download_link'] . '" class="button" download="Custom-Theme">Download</a>';
+
                         echo $output;
                     } else {
                         $output .= '<p>Your theme is up to date.</p>';
@@ -278,6 +305,19 @@ function theme_versions_available()
         }
     }
 }
+
+function custom_theme_download_filename($filename, $file, $attachment_id)
+{
+    // Provjerite je li datoteka preuzeta povezana s određenom temom
+    if (strpos($file, 'theme-update') !== false) {
+        // Postavite željeno ime datoteke
+        $filename = 'Custom-Theme.zip';
+    }
+
+    return $filename;
+}
+add_filter('wp_get_attachment_filename', 'custom_theme_download_filename', 10, 3);
+
 
 
 // function theme_versions_available()
