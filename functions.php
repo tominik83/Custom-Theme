@@ -16,42 +16,42 @@
 // 
 
 
-error_reporting(E_ALL);
+// error_reporting(E_ALL);
 
 
 function theme_settings_page()
 {
     add_menu_page(
         'theme-panel',
-        'Custom Theme', 
-        'manage_options', 
-        'theme-panel', 
+        'Custom Theme',
+        'manage_options',
+        'theme-panel',
         'theme_option_form'
     );
 
-    
+
     add_submenu_page(
-        'theme-panel', 
-        'Style', 
-        'Style', 
-        'manage_options', 
-        'theme-panel-style', 
+        'theme-panel',
+        'Style',
+        'Style',
+        'manage_options',
+        'theme-panel-style',
         'theme_submenu_style'
     );
     add_submenu_page(
-        'theme-panel', 
-        'Settings', 
-        'Settings', 
-        'manage_options', 
-        'theme-panel-settings', 
+        'theme-panel',
+        'Settings',
+        'Settings',
+        'manage_options',
+        'theme-panel-settings',
         'theme_submenu_settings'
     );
     add_submenu_page(
-        'theme-panel', 
-        'Theme Update', 
-        'Theme Update', 
-        'manage_options', 
-        'theme-update', 
+        'theme-panel',
+        'Theme Update',
+        'Theme Update',
+        'manage_options',
+        'theme-update',
         'theme_update_version_admin_page'
     );
 }
@@ -73,7 +73,7 @@ function theme_option_form()
 
 function theme_submenu_style()
 {
-    require get_template_directory() . '/inc/admin/admin_template_style.php';
+    // require get_template_directory() . '/inc/admin/admin_template_style.php';
 
 }
 
@@ -231,43 +231,51 @@ add_action('template_redirect', 'ogranicenje_pristupa_stranicama');
 //     }
 // }
 
+function fetch_theme_data($server_url, $headers, $request_args)
+{
+    $response = wp_safe_remote_request($server_url, array('headers' => $headers) + $request_args);
+
+    if (is_wp_error($response)) {
+        // Error getting data
+        echo '<p class="error-msg">API Error</p>';
+        return null;
+    } else {
+        $body = wp_remote_retrieve_body($response);
+        return json_decode($body, true);
+    }
+}
+
+function save_theme_data_locally($local_json_file, $body)
+{
+    file_put_contents($local_json_file, $body);
+}
+
 function theme_versions_available()
 {
-    $github_username = 'tominik83';
-    $github_repo = 'Custom-Theme';
-    // $token = "";
-    $server_url = "http://dev.bibliotehnika.tk.test/wp-json/themes/releases/data/";
+    $server_url = "http://dev.bibliotehnika.tk.test/wp-json/themes/releases/data";
+    // $server_url = "https://bibliotehnika.com/wp-json/themes/releases/data";
     $local_json_file = get_template_directory() . '/update/theme_release_data.json';
 
-    // Check if local JSON file exists
-    // if (file_exists($local_json_file)) {
-    //     $body = file_get_contents($local_json_file);
-    //     $data = json_decode($body, true);
-    // } else {
-        // Fetch data from the server if the local file doesn't exist
-        $headers = array(
-            'User-Agent: Custom-Theme',
-            // 'Authorization: Bearer ' . $token,
-        );
+    $headers = array(
+        'User-Agent: Custom-Theme',
+    );
 
-        $request_args = array(
-            'timeout' => 10,
-        );
-        $response = wp_safe_remote_request($server_url, array('headers' => $headers) + $request_args);
+    $request_args = array(
+        'timeout' => 10,
+    );
 
-        if (is_wp_error($response)) {
-            // Error getting data
-            echo '<p class="error-msg">Error</p>';
-            return;
-        } else {
-            $body = wp_remote_retrieve_body($response);
-            $data = json_decode($body, true);
+    // Fetch data from the server
+    $data = fetch_theme_data($server_url, $headers, $request_args);
 
-            // Save fetched data to local JSON file for future use
-            file_put_contents($local_json_file, $body);
-        }
-    // }
+    if ($data !== null) {
+        // Save fetched data to local JSON file for future use
+        save_theme_data_locally($local_json_file, json_encode($data));
+        check_for_updates($data);
+    }
+}
 
+function check_for_updates($data)
+{
     if (is_array($data)) {
         $latest_download_link = null;
         $theme = wp_get_theme();
@@ -275,48 +283,126 @@ function theme_versions_available()
 
         foreach ($data as $release) {
             if (isset($release['tag_name'])) {
+                $github_username = 'tominik83';
+                $github_repo = 'Custom-Theme';
                 $tag_name = esc_html($release['tag_name']);
                 $name = esc_html($release['name']);
                 $release_notes = esc_html($release['body']);
+                $published = esc_html($release['published_at']);
                 $latest_download_link = esc_url("https://github.com/$github_username/$github_repo/archive/refs/tags/$tag_name.zip");
 
-                $theme_update_data = compact('tag_name', 'release_notes', 'latest_download_link', 'current_version');
+                $theme_update_data = compact('tag_name', 'release_notes', 'published', 'latest_download_link', 'current_version');
 
                 if (version_compare($current_version, $tag_name, '<')) {
-                    $output = '';
-
-                    if ($theme_update_data) {
-                        $output .= '<p>Theme Version: ' . esc_html($theme_update_data['tag_name']) . '</p>';
-                        $output .= '<p>Description: ' . esc_html($theme_update_data['release_notes']) . '</p>';
-                        $theme_name = 'Custom-Theme';
-                        // $output .= '<a href="' . $theme_update_data['latest_download_link'] . '" class="button" download="' . $theme_name . '">Download</a>';
-
-                        
-
-                        // $output .= '<a href="' . $theme_update_data['latest_download_link'] . '" class="button">Download</a>';
-                        $output .= '<a href="' . $theme_update_data['latest_download_link'] . '" class="button" download="Custom-Theme">Download</a>';
-
-                        echo $output;
-                    } else {
-                        $output .= '<p>Your theme is up to date.</p>';
-                    }
+                    theme_update_info($theme_update_data);
                 }
             }
         }
     }
 }
 
-function custom_theme_download_filename($filename, $file, $attachment_id)
+function theme_update_info($theme_update_data)
 {
-    // Provjerite je li datoteka preuzeta povezana s određenom temom
-    if (strpos($file, 'theme-update') !== false) {
-        // Postavite željeno ime datoteke
-        $filename = 'Custom-Theme.zip';
-    }
+    $output = '<div id="update-result_info" style="display: flex; flex-direction: column; justify-content: centar; align-items: centar;">';
+    $output .= '<p>Theme Version: ' . esc_html($theme_update_data['tag_name']) . '</p>';
+    $output .= '<p>Description: ' . esc_html($theme_update_data['release_notes']) . '</p>';
+    $output .= '<p>Published: ' . date('d.m.Y', strtotime($theme_update_data['published'])) . '</p>';
+    $output .= '<a href="' . $theme_update_data['latest_download_link'] . '" class="download-button" download="Custom-Theme">Download</a>';
+    $output .= '</div>';
 
-    return $filename;
+    echo $output;
 }
-add_filter('wp_get_attachment_filename', 'custom_theme_download_filename', 10, 3);
+
+
+
+
+
+
+// function theme_versions_available()
+// {
+//     $github_username = 'tominik83';
+//     $github_repo = 'Custom-Theme';
+//     // $token = "";
+//     // $server_url = "http://api.bibliotehnika.tk/wp-json/themes/custom-theme/releases/data/";
+//     $server_url = "http://dev.bibliotehnika.tk.test/wp-json/themes/releases/data/";
+//     $local_json_file = get_template_directory() . '/update/theme_release_data.json';
+
+//     // Check if local JSON file exists
+//     // if (file_exists($local_json_file)) {
+//     //     $body = file_get_contents($local_json_file);
+//     //     $data = json_decode($body, true);
+//     // } else {
+//     // Fetch data from the server if the local file doesn't exist
+//     $headers = array(
+//         'User-Agent: Custom-Theme',
+//         // 'Authorization: Bearer ' . $token,
+//     );
+
+//     $request_args = array(
+//         'timeout' => 10,
+//     );
+//     $response = wp_safe_remote_request($server_url, array('headers' => $headers) + $request_args);
+
+//     if (is_wp_error($response)) {
+//         // Error getting data
+//         echo '<p class="error-msg">Error</p>';
+//         return;
+//     } else {
+//         $body = wp_remote_retrieve_body($response);
+//         $data = json_decode($body, true);
+
+//         // Save fetched data to local JSON file for future use
+//         file_put_contents($local_json_file, $body);
+//     }
+//     // }
+
+//     if (is_array($data)) {
+//         $latest_download_link = null;
+//         $theme = wp_get_theme();
+//         $current_version = $theme->get('Version');
+
+//         foreach ($data as $release) {
+//             if (isset($release['tag_name'])) {
+//                 $tag_name = esc_html($release['tag_name']);
+//                 $name = esc_html($release['name']);
+//                 $release_notes = esc_html($release['body']);
+//                 $published = esc_html($release['published_at']);
+//                 $latest_download_link = esc_url("https://github.com/$github_username/$github_repo/archive/refs/tags/$tag_name.zip");
+
+//                 $theme_update_data = compact('tag_name', 'release_notes', 'published', 'latest_download_link', 'current_version');
+
+//                 if (version_compare($current_version, $tag_name, '<')) {
+//                     $output = '';
+
+//                     if ($theme_update_data) {
+//                         $output .= '<p>Theme Version: ' . esc_html($theme_update_data['tag_name']) . '</p>';
+//                         $output .= '<p>Description: ' . esc_html($theme_update_data['release_notes']) . '</p>';
+//                         // $output .= '<p>Published: ' . date('d.m.Y H:i:s', strtotime($theme_update_data['published'])) . '</p>';
+//                         $output .= '<p>Published: ' . date('d.m.Y', strtotime($theme_update_data['published'])) . '</p>';
+
+//                         $output .= '<a href="' . $theme_update_data['latest_download_link'] . '" class="button" download="Custom-Theme">Download</a>';
+
+//                         echo $output;
+//                     } else {
+//                         $output .= '<p>Your theme is up to date.</p>';
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// function custom_theme_download_filename($filename, $file, $attachment_id)
+// {
+//     // Provjerite je li datoteka preuzeta povezana s određenom temom
+//     if (strpos($file, 'theme-update') !== false) {
+//         // Postavite željeno ime datoteke
+//         $filename = 'Custom-Theme.zip';
+//     }
+
+//     return $filename;
+// }
+// add_filter('wp_get_attachment_filename', 'custom_theme_download_filename', 10, 3);
 
 
 
@@ -373,81 +459,81 @@ add_filter('wp_get_attachment_filename', 'custom_theme_download_filename', 10, 3
 
 
 // Funkcija za provjeru ažuriranja
-function theme_update_version_down()
-{
-    $github_username = 'tominik83';
-    $github_repo = 'Custom-Theme';
-    $url = "https://api.github.com/repos/$github_username/$github_repo/releases/latest";
+// function theme_update_version_down()
+// {
+//     $github_username = 'tominik83';
+//     $github_repo = 'Custom-Theme';
+//     $url = "https://api.github.com/repos/$github_username/$github_repo/releases/latest";
 
-    // Replace 'YOUR_GITHUB_TOKEN' with your actual GitHub token
-    $token = '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';
+//     // Replace 'YOUR_GITHUB_TOKEN' with your actual GitHub token
+//     $token = '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';
 
-    $headers = array(
-        'User-Agent: Custom-Theme',
-        'Authorization: Bearer ' . $token,
-    );
+//     $headers = array(
+//         'User-Agent: Custom-Theme',
+//         'Authorization: Bearer ' . $token,
+//     );
 
-    $request_args = array(
-        'timeout' => 60,
-    );
+//     $request_args = array(
+//         'timeout' => 60,
+//     );
 
-    $response = wp_safe_remote_request($url, array('headers' => $headers) + $request_args);
+//     $response = wp_safe_remote_request($url, array('headers' => $headers) + $request_args);
 
-    if (is_wp_error($response)) {
-        echo '<p class="error-msg">Error</p>';
-    } else {
-        $body = wp_remote_retrieve_body($response);
-        $data = json_decode($body, true);
+//     if (is_wp_error($response)) {
+//         echo '<p class="error-msg">Error</p>';
+//     } else {
+//         $body = wp_remote_retrieve_body($response);
+//         $data = json_decode($body, true);
 
-        if ($data && isset($data['tag_name'])) {
-            $latest_version = esc_html($data['tag_name']);
-            $release_notes = esc_html($data['body']);
-            $download_link = "https://github.com/$github_username/$github_repo/archive/refs/tags/$latest_version.zip";
+//         if ($data && isset($data['tag_name'])) {
+//             $latest_version = esc_html($data['tag_name']);
+//             $release_notes = esc_html($data['body']);
+//             $download_link = "https://github.com/$github_username/$github_repo/archive/refs/tags/$latest_version.zip";
 
-            $theme = wp_get_theme();
-            $current_version = $theme->get('Version');
+//             $theme = wp_get_theme();
+//             $current_version = $theme->get('Version');
 
-            add_meta_box(
-                'theme_update_metabox',
-                'Theme Update Information',
-                'display_theme_update_info',
-                'dashboard',
-                'normal',
-                'high'
-            );
+//             add_meta_box(
+//                 'theme_update_metabox',
+//                 'Theme Update Information',
+//                 'display_theme_update_info',
+//                 'dashboard',
+//                 'normal',
+//                 'high'
+//             );
 
-            global $theme_update_data;
-            $theme_update_data = compact('latest_version', 'release_notes', 'download_link', 'current_version');
+//             global $theme_update_data;
+//             $theme_update_data = compact('latest_version', 'release_notes', 'download_link', 'current_version');
 
-            if (version_compare($latest_version, $current_version, '>')) {
-                update_user_meta(get_current_user_id(), 'theme_update_available', true);
-                $counts = array(); // Initialize $counts
-                // add_filter('update_count', 'theme_update_count', 10, 1);
-            }
-        }
-    }
-}
+//             if (version_compare($latest_version, $current_version, '>')) {
+//                 update_user_meta(get_current_user_id(), 'theme_update_available', true);
+//                 $counts = array(); // Initialize $counts
+//                 // add_filter('update_count', 'theme_update_count', 10, 1);
+//             }
+//         }
+//     }
+// }
 
 // Funkcija za prikaz metabox-a na dashboardu
-function display_theme_update_info()
-{
-    global $theme_update_data;
+// function display_theme_update_info()
+// {
+//     global $theme_update_data;
 
-    $output = '';
+//     $output = '';
 
-    if ($theme_update_data) {
-        $output .= '<p>Theme Version: ' . esc_html($theme_update_data['latest_version']) . '</p>';
-        $output .= '<p>Description: ' . esc_html($theme_update_data['release_notes']) . '</p>';
+//     if ($theme_update_data) {
+//         $output .= '<p>Theme Version: ' . esc_html($theme_update_data['latest_version']) . '</p>';
+//         $output .= '<p>Description: ' . esc_html($theme_update_data['release_notes']) . '</p>';
 
-        if (get_user_meta(get_current_user_id(), 'theme_update_available', true)) {
-            $output .= '<a href="' . $theme_update_data['download_link'] . '" class="button">Download Update</a>';
-        } else {
-            $output .= '<p>Your theme is up to date.</p>';
-        }
-    }
+//         if (get_user_meta(get_current_user_id(), 'theme_update_available', true)) {
+//             $output .= '<a href="' . $theme_update_data['download_link'] . '" class="button">Download Update</a>';
+//         } else {
+//             $output .= '<p>Your theme is up to date.</p>';
+//         }
+//     }
 
-    echo $output;
-}
+//     echo $output;
+// }
 
 // Funkcija za dinamički prikazivanje broja ažuriranja teme
 function theme_update_count($counts)

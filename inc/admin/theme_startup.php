@@ -96,7 +96,7 @@ function my_theme_support()
 	 */
 	$starter_content = apply_filters( 'sas_theme_starter_content', $starter_content );
 
-	add_theme_support( 'starter-content', $starter_content );
+	// add_theme_support( 'starter-content', $starter_content );
 
 
 

@@ -4,7 +4,7 @@
 <div style="height:100px"></div>
 <div class="text parallax">
     <h2>Dobro Dosli</h2>
-    <h1>Zanimljivo</h1>
+    <h1>Work in progress</h1>
 </div>
 
 
