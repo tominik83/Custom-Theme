@@ -6,7 +6,7 @@ Template Name: Single
 ?>
 
 
-<?php get_header('secondary'); ?>
+<?php get_header(); ?>
 
 <div class="single-container flex">
 

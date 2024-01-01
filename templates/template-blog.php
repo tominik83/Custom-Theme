@@ -6,7 +6,7 @@ Template Name: Blog
 ?>
 
 
-<?php get_header('secondary'); ?>
+<?php get_header(); ?>
 
 <div class="blog-container flex">
 

@@ -5,7 +5,7 @@ Template Name: Hotspot
 */
 ?>
 
-<?php get_header('secondary'); ?>
+<?php get_header(); ?>
 
 
 

@@ -19,7 +19,7 @@
 			<!-- <span class="sep">  |  </span> -->
 				<?php
 				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme : %1$s by %2$s.', 'Custom-Theme' ), 'Custom-Theme', '<a href="http://dev.bibliotehnika.tk/about/"> Mihajlo Tomic</a>' );
+				printf( esc_html__( 'Theme : %1$s by %2$s.', 'Custom-Theme' ), 'Custom-Theme', '<a href="http://dev.bibliotehnika.tk/about/"> ??? </a>' );
 				?>
 		</div>
 	</footer>

@@ -5,11 +5,11 @@ Template Name: 404
 */
 ?>
 
-<?php get_header('secondary'); ?>
+<?php get_header(); ?>
 
 
 
-<div id="primary" class="content-area flex">
+<div id="header-menu" class="content-area flex">
 
     <!-- <header class="page-header">
         <h1 class="page-title">

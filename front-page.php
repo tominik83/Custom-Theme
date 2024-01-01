@@ -1,10 +1,18 @@
-<?php get_header();?>
+<?php get_header(); ?>
 
-<div class="main flex">
+<div class="main">
 
-<?php get_template_part('inc/section', 'content');?>
+    <!-- <style>
+        .main {
+            background-image: url('<?php echo get_template_directory_uri(); ?>/inc/img/15424.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style> -->
+
+    <?php get_template_part('inc/section', 'content'); ?>
 
 
 </div>
 
-<?php get_footer();?>
+<?php get_footer(); ?>

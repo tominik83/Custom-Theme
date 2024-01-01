@@ -19,6 +19,7 @@
 // error_reporting(E_ALL);
 
 
+
 function theme_settings_page()
 {
     add_menu_page(
@@ -73,7 +74,7 @@ function theme_option_form()
 
 function theme_submenu_style()
 {
-    // require get_template_directory() . '/inc/admin/admin_template_style.php';
+    require get_template_directory() . '/inc/admin/admin_template_style.php';
 
 }
 
@@ -133,7 +134,7 @@ function promeni_ime_navigacionog_linka($items, $args)
     if (is_user_logged_in()) {
         // Pronađi link koji ima tekst "Neki Link" i promeni ga u "Logout"
         foreach ($items as $item) {
-            if ($item->title == 'Get In') {
+            if ($item->title == 'Login') {
                 $item->title = 'Logout';
                 break;
             }
@@ -156,11 +157,11 @@ function ogranicenje_pristupa_stranicama()
     // Proveri da li je plugin instaliran
     if (function_exists('is_plugin_active') && is_plugin_active($plugin_path)) {
         // Proveri da li trenutna stranica nije početna
-        if (!is_front_page()) {
+        if (!is_front_page() && !is_page('radio')) {
             // Proveri da li korisnik nije prijavljen i nije na stranici "get-in"
-            if (!is_user_logged_in() && !is_page('get-in')) {
+            if (!is_user_logged_in() && !is_page('login')) {
                 // Ako nije prijavljen i nije na stranici "get-in", preusmeri ga na početnu stranicu
-                wp_redirect(home_url('/get-in'));
+                wp_redirect(home_url('/login'));
                 exit;
             }
         }
@@ -169,6 +170,14 @@ function ogranicenje_pristupa_stranicama()
 }
 
 add_action('template_redirect', 'ogranicenje_pristupa_stranicama');
+
+
+// define('MY_THEME_DEFAULT_IMAGE_DIR', get_template_directory_uri() . '/inc/img');
+
+// // Funkcija koja koristi podrazumevani direktorijum za slike
+// function my_theme_get_default_image_url($image_name) {
+//     return MY_THEME_DEFAULT_IMAGE_DIR . '/' . $image_name;
+// }
 
 
 // Dodajte akciju za provjeru ažuriranja prilikom inicijalizacije admin dijela
@@ -252,7 +261,7 @@ function save_theme_data_locally($local_json_file, $body)
 
 function theme_versions_available()
 {
-    $server_url = "http://dev.bibliotehnika.tk.test/wp-json/themes/releases/data";
+    $server_url = "http://bibliotehnika.com.test/wp-json/themes/releases/data";
     // $server_url = "https://bibliotehnika.com/wp-json/themes/releases/data";
     $local_json_file = get_template_directory() . '/update/theme_release_data.json';
 

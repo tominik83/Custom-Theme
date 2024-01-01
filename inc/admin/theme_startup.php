@@ -53,50 +53,34 @@ function my_theme_support()
 
     register_nav_menus(
         array(
-            'header-menu' => __( 'Header Menu Location', 'sas_theme'),
-            'footer-menu' => __( 'Footer Menu Location', 'sas_theme'),
-            'mobile-menu' => __( 'Mobile Menu Location', 'sas_theme'),
+            'header-menu' => __('Header Menu Location', 'custom-theme'),
+            'footer-menu' => __('Footer Menu Location', 'custom-theme'),
+            'mobile-menu' => __('Mobile Menu Location', 'custom-theme'),
+            'radio-menu' => __('Radio Menu Location', 'custom-theme'),
         )
     );
 
-    $starter_content = array(
-		// Set up nav menus for each of the two areas registered in the theme.
-		'nav_menus'   => array(
-			// Assign a menu to the "top" location.
-			'header-menu'    => array(
-				'name'  => __('Header Menu Location', 'sas_theme' ),
-				'items' => array(
-					'link_home', // Note that the core "home" page is actually a link in case a static front page is not used.
-					'page_about',
-					'page_blog',
-					'page_contact',
-				),
-			),
 
-			// Assign a menu to the "social" location.
-			'footer-menu' => array(
-				'name'  => __('Footer Menu Location', 'sas_theme' ),
-				'items' => array(
-					'link_yelp',
-					'link_facebook',
-					'link_twitter',
-					'link_instagram',
-					'link_email',
-				),
-			),
-		),
-	);
+    add_theme_support('custom-background');
 
-	/**
-	 * Filters Custom Theme array of starter content.
-	 *
-	 * @since Custom Theme 1.1
-	 *
-	 * @param array $starter_content Array of starter content.
-	 */
-	$starter_content = apply_filters( 'sas_theme_starter_content', $starter_content );
+    
 
-	// add_theme_support( 'starter-content', $starter_content );
+    add_theme_support('widget');
+    
+    register_sidebar(array(
+        'name' => __('CT-Widget', 'custom-theme'),
+        'id' => 'ct-widget',
+        'description' => __('Opis widgeta', 'custom-theme'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h2 class="widget-title">',
+        'after_title' => '</h2>',
+    ));
+
+    // add_action('widgets_init', 'dodaj_widget podršku');
+
+
+    
 
 
 
@@ -104,5 +88,40 @@ function my_theme_support()
 }
 
 add_action('after_setup_theme', 'my_theme_support');
+
+
+function custom_heme_starter_content() {
+
+    $starter_content = array(
+        // Set up nav menus for each of the two areas registered in the theme.
+        'nav_menus' => array(
+            // Assign a menu to the "top" location.
+            'header-menu' => array(
+                'name' => __('Header Menu Location', 'custom_theme'),
+                'items' => array(
+                    'link_home', // Note that the core "home" page is actually a link in case a static front page is not used.
+                    'page_about',
+                    'page_blog',
+                    'page_contact',
+                ),
+            ),
+
+            // Assign a menu to the "social" location.
+            'footer-menu' => array(
+                'name' => __('Footer Menu Location', 'custom_theme'),
+                'items' => array(
+                    'link_yelp',
+                    'link_facebook',
+                    'link_twitter',
+                    'link_instagram',
+                    'link_email',
+                ),
+            ),
+        ),
+    );
+    $starter_content = apply_filters('custom_theme_starter_content', $starter_content);
+}
+
+// add_theme_support( 'starter-content', $starter_content );
 
 

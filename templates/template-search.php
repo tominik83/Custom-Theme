@@ -6,7 +6,7 @@ Template Name: Search
 ?>
 
 
-<?php get_header('secondary'); ?>
+<?php get_header(); ?>
 
 <div class="search-container flex">
 

@@ -12,7 +12,17 @@
     endif; ?> -->
 
 
-<?php
+
+
+<div class="wrapper-main">
+
+    <div class="layout-grid">
+
+        <div class="col">
+            <div class="card border-crvena">
+                <h2 class="card__title">Post</h2>
+                <p>New Post</p>
+                <?php
 $args = array(
     'post_type'      => 'post', // Tip postova (može biti i 'page', 'custom_post_type' itd.)
     'posts_per_page' => 15, // Broj postova koji će biti prikazani
@@ -25,7 +35,7 @@ $query = new WP_Query( $args );
 if ( $query->have_posts() ) :
     while ( $query->have_posts() ) : $query->the_post();
         ?>
-        <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+        <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
         <p><?php the_content(); ?></p>
         <?php
     endwhile;
@@ -36,3 +46,32 @@ else :
     <?php
 endif;
 ?>
+                <img class="" alt="" />
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card border-plava">
+                <h2 class="card__title">RADIO</h2>
+                <h5>Visit our radio stations</h5>
+                <p>Good Vibes</p>
+                <img class="card__img" src="" alt="" />
+            </div>
+            <div class="card border-zelena">
+                <h2 class="card__title">THEMES</h2>
+                <p>Theme gallery</p>
+                <img class="card__img" src="/wp-content/themes/custom theme/inc/img/themes-svgrepo-com.svg" alt="" />
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card border-zuta">
+                <h2 class="card__title">APPLICATIONS</h2>
+                <p>Useful applications</p>
+                <img class="card__img" src="/wp-content/themes/custom theme/inc/img/application-svgrepo-com.svg" alt="" >
+            </div>
+        </div>
+
+    </div>
+
+</div>

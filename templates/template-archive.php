@@ -5,7 +5,7 @@ Template Name: Archive
 */
 ?>
 
-<?php get_header('secondary'); ?>
+<?php get_header(); ?>
 
 
 <div class="archive-container flex">

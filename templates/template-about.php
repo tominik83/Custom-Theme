@@ -6,15 +6,35 @@ Template Name: About Us
 ?>
 
 
-<?php get_header('secondary'); ?>
+<?php get_header(); ?>
 
 <div class="about-container flex">
 
 
-    <!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
 
-    <!-- <p id="client-ip" class="client-ip h4">IP Adress</p> -->
-    <!-- <div id="my_radio">
+    <div class="container">
+        <div class="Neka-Slika">
+            <p>Your rotating text goes here.</p>
+        </div>
+    </div>
+    <div class="Opet-neka-slika"></div>
+    <div class="Nekitekst"></div>
+    <div class="Neki-linkovi"></div>
+    <div class="Opet-nesto"></div>
+    <div class="I-ovde-nesto"></div>
+    <div class="Glavna-slika">
+        <div class="rotating-cylinder">
+            <div class="text-container">
+                <p>Your rotating text goes here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
+
+<!-- <p id="client-ip" class="client-ip h4">IP Adress</p> -->
+<!-- <div id="my_radio">
         <audio controls>
             <source src="https://myradio.bibliotehnika.com/listen/techno_chronicles/set.mp3" type="audio/mp3">
             Your browser does not support the audio tag.
@@ -43,14 +63,22 @@ Template Name: About Us
 
     </div> -->
 
-    <?php
-    // Output information about the theme update
-    theme_versions_available(); // display_theme_update_info();
-    ?> 
-
-    
+<?php
+// Output information about the theme update
+// theme_versions_available(); // display_theme_update_info();
+?>
 
 
+<!-- <div class="jumbotron"
+        style="background: url('https://unsplash.it/1920/500?image=974') no-repeat center; background-size: cover;"
+        data-paroller-factor="-0.2">Super PAralex</div> -->
+
+
+<!-- <div data-paroller-factor="-0.1" data-paroller-factor-xs="0.1" data-paroller-type="foreground"
+        data-paroller-direction="vertical" class="jumbotron" style="background: url('https://unsplash.it/1920/500?image=974') no-repeat center; background-size: cover;"
+data-paroller-factor="-0.2">
+        Awesome element with parallax effect
+    </div> -->
 
 
 
@@ -62,7 +90,7 @@ Template Name: About Us
 
 
 
-    <!-- <div id="audio-info-container">
+<!-- <div id="audio-info-container">
         <p id="song-title">Naziv pesme:</p>
         <p id="artist">Izvođač:</p>
         <p id="genre">Žanr:</p>
@@ -94,43 +122,32 @@ Template Name: About Us
         // Inicijalni poziv kako biste odmah dobili informacije prilikom učitavanja stranice
         updateSongInfo();
     </script> -->
-    <?php
-    $nodered_shortcode = get_option('nodered_data key="temperature1"', '');
-    echo do_shortcode($nodered_shortcode);
-    ?>
-    [nodered_data key="temperature1"]
-
-    <?php
-    $notification_shortcode = get_option('notification_shortcode', '');
-    echo do_shortcode($notification_shortcode);
-    ?>
-
-        
-
-    <!-- <iframe id="11320747" allowtransparency="true" frameborder="0" style="width:100%;border:none;" src="//www.chess.com/emboard?id=11320747"></iframe><script>window.addEventListener("message",e=>{e['data']&&"11320747"===e['data']['id']&&document.getElementById(`${e['data']['id']}`)&&(document.getElementById(`${e['data']['id']}`).style.height=`${e['data']['frameHeight']+30}px`)});</script> -->
-
-    <!-- <input type="text" onfocus="this.value=''" value="Blabla"> -->
 
 
-    <!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
+<!-- <iframe id="11320747" allowtransparency="true" frameborder="0" style="width:100%;border:none;" src="//www.chess.com/emboard?id=11320747"></iframe><script>window.addEventListener("message",e=>{e['data']&&"11320747"===e['data']['id']&&document.getElementById(`${e['data']['id']}`)&&(document.getElementById(`${e['data']['id']}`).style.height=`${e['data']['frameHeight']+30}px`)});</script> -->
 
-    <!-- <h1 class="animate__animated animate__bounce">An animated element</h1> -->
+<!-- <input type="text" onfocus="this.value=''" value="Blabla"> -->
 
 
-    <?php if (have_posts()):
-        while (have_posts()):
-            the_post(); ?>
+<!-- <div style="height:100px" aria-hidden="true" class="div-spacer"></div> -->
 
-            <?php the_content(); ?>
+<!-- <h1 class="animate__animated animate__bounce">An animated element</h1> -->
 
-        <?php endwhile;
-    else:
-    endif; ?>
+
+<?php if (have_posts()):
+    while (have_posts()):
+        the_post(); ?>
+
+        <?php the_content(); ?>
+
+    <?php endwhile;
+else:
+endif; ?>
 
 
 
 
-    <div style="height:100px" aria-hidden="true" class="div-spacer"></div>
+<div style="height:100px" aria-hidden="true" class="div-spacer"></div>
 </div>
 
 
